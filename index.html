@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>إثراء وأثر — من التعلم إلى إنتاج المعرفة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Noto+Kufi+Arabic:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --em-900:#0B3F35; --em-800:#0F5446; --em-700:#13695A; --em-600:#1A7E6C; --em-100:#E3EFEA; --em-50:#F1F7F4;
+  --cream:#F8F4EC; --cream-2:#F1EADD; --paper:#FFFDF9;
+  --gold:#A9864B; --gold-2:#C9AE7C; --gold-50:#F6EEDF;
+  --ink:#1C2826; --ink-2:#44524F; --ink-3:#6E7B78; --line:#E4DDD0; --line-2:#EEE8DD;
+  --danger:#A4453A; --danger-50:#F8E9E6; --warn:#8A6A1F; --warn-50:#FAF1DC;
+  --r:14px; --r-sm:10px;
+  --shadow:0 1px 2px rgba(20,40,35,.05),0 6px 20px rgba(20,40,35,.06);
+  --f-body:"IBM Plex Sans Arabic",system-ui,sans-serif;
+  --f-head:"Noto Kufi Arabic","IBM Plex Sans Arabic",sans-serif;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:var(--f-head);line-height:1.45;margin:0;color:var(--em-900);font-weight:700}
+p{margin:0}
+a{color:var(--em-700)}
+button,input,select,textarea{font-family:inherit;font-size:inherit;color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+svg.i{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* Header */
+header.top{position:sticky;top:0;z-index:20;background:rgba(255,253,249,.92);backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:20px;min-height:68px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;flex:none}
+.mark{width:40px;height:40px;border-radius:11px;background:var(--em-800);display:grid;place-items:center}
+.brand b{font-family:var(--f-head);font-size:19px;color:var(--em-900);display:block;line-height:1.2}
+.brand small{font-size:12px;color:var(--gold);display:block;line-height:1.4}
+nav.main{display:flex;gap:4px;margin-inline-start:auto;overflow-x:auto;scrollbar-width:none}
+nav.main::-webkit-scrollbar{display:none}
+nav.main a{display:flex;align-items:center;gap:7px;padding:8px 13px;border-radius:999px;text-decoration:none;color:var(--ink-2);font-size:14.5px;font-weight:500;white-space:nowrap}
+nav.main a:hover{background:var(--em-50);color:var(--em-800)}
+nav.main a[aria-current="page"]{background:var(--em-800);color:#fff}
+nav.main a svg.i{width:18px;height:18px}
+.role{flex:none;font-size:12.5px;padding:5px 11px;border-radius:999px;background:var(--gold-50);color:var(--warn);border:1px solid #E9DCBF;white-space:nowrap}
+
+main{min-height:70vh;padding-bottom:64px}
+.view{display:none}
+.view.on{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* Hero */
+.hero{background:var(--em-900);color:#fff;position:relative;overflow:hidden}
+.hero .wrap{padding-top:64px;padding-bottom:72px;position:relative;z-index:1}
+.hero .pattern{position:absolute;inset:0;opacity:.09}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:var(--gold-2);letter-spacing:0;margin-bottom:14px}
+.eyebrow:before{content:"";width:22px;height:1px;background:var(--gold-2)}
+.hero h1{color:#fff;font-size:clamp(34px,5vw,54px);font-weight:700}
+.hero .slogan{font-size:clamp(18px,2.3vw,23px);color:#E7DCC6;margin-top:6px;font-weight:300}
+.hero .lead{max-width:640px;margin-top:22px;color:#CFE0DA;font-size:16.5px}
+.meta{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:34px;padding-top:24px;border-top:1px solid rgba(255,255,255,.14);font-size:14px;color:#BFD3CC}
+.meta b{color:#fff;font-weight:500;margin-inline-start:4px}
+
+.gates{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:-40px;position:relative;z-index:2}
+.gate{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:26px 24px 22px;text-decoration:none;color:inherit;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px;transition:transform .2s,border-color .2s}
+.gate:hover{transform:translateY(-3px);border-color:var(--gold-2)}
+.gate .ic{width:46px;height:46px;border-radius:12px;background:var(--em-50);color:var(--em-700);display:grid;place-items:center}
+.gate .num{font-family:var(--f-head);color:var(--gold);font-size:13px}
+.gate h3{font-size:20px}
+.gate p{color:var(--ink-2);font-size:14.5px}
+.gate .go{margin-top:auto;padding-top:8px;color:var(--em-700);font-weight:600;font-size:14px;display:flex;align-items:center;gap:6px}
+
+.cta{margin-top:22px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:22px 26px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.cta .t{flex:1;min-width:240px}
+.cta h3{font-size:18px}
+.cta p{color:var(--ink-2);font-size:14.5px}
+
+/* Sections */
+.sec{padding-top:48px}
+.sec-h{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.sec-h h2{font-size:clamp(22px,2.6vw,28px)}
+.sec-h p{color:var(--ink-3);font-size:15px;max-width:640px}
+.page-h{padding:40px 0 8px}
+.page-h .crumb{font-size:13px;color:var(--gold);margin-bottom:6px}
+.page-h h1{font-size:clamp(26px,3.4vw,36px)}
+.page-h p{color:var(--ink-2);margin-top:6px;max-width:720px}
+
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:22px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+
+/* Tabs (sub nav) */
+.tabs{display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin:18px 0 26px}
+.tabs button{background:none;border:0;padding:10px 14px;cursor:pointer;color:var(--ink-3);font-weight:500;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabs button[aria-selected="true"]{color:var(--em-800);border-color:var(--gold)}
+.pane{display:none}.pane.on{display:block}
+
+.vm{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.vm .card{position:relative;padding:28px}
+.vm .k{font-size:13px;color:var(--gold);font-weight:600}
+.vm .v{font-family:var(--f-head);font-size:19px;color:var(--em-900);margin-top:6px;line-height:1.8}
+.vm .card.em{background:var(--em-800);border-color:var(--em-800)}
+.vm .card.em .v{color:#fff}.vm .card.em .k{color:var(--gold-2)}
+
+ol.clean,ul.clean{list-style:none;margin:0;padding:0}
+.reasons li,.goals li{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--line-2)}
+.reasons li:last-child,.goals li:last-child{border:0}
+.badge-n{flex:none;width:30px;height:30px;border-radius:9px;background:var(--gold-50);color:var(--gold);display:grid;place-items:center;font-family:var(--f-head);font-size:14px}
+
+.tracks{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.track{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:8px}
+.track .h{display:flex;align-items:center;gap:12px}
+.track .ic{width:40px;height:40px;border-radius:10px;background:var(--em-50);color:var(--em-700);display:grid;place-items:center;flex:none}
+.track h3{font-size:16.5px}
+.track p{font-size:14.5px;color:var(--ink-2)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.chip{font-size:12.5px;padding:3px 10px;border-radius:999px;background:var(--cream);border:1px solid var(--line);color:var(--ink-2)}
+
+.phases{position:relative;display:grid;gap:14px}
+.phase{display:grid;grid-template-columns:56px 1fr;gap:16px;align-items:start;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px}
+.phase .n{width:56px;height:56px;border-radius:14px;background:var(--em-50);color:var(--em-800);display:grid;place-items:center;font-family:var(--f-head);font-size:22px}
+.phase.now{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-50)}
+.phase.now .n{background:var(--em-800);color:#fff}
+.phase h3{font-size:17px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.phase p{font-size:14.5px;color:var(--ink-2);margin-top:4px}
+.phase .row{display:flex;gap:18px;flex-wrap:wrap;margin-top:8px;font-size:13.5px;color:var(--ink-3)}
+.phase .row b{color:var(--ink-2);font-weight:600}
+.tag{font-size:12px;padding:2px 10px;border-radius:999px;background:var(--gold-50);color:var(--warn);font-weight:500;font-family:var(--f-body)}
+.tag.em{background:var(--em-100);color:var(--em-800)}
+.tag.red{background:var(--danger-50);color:var(--danger)}
+.note{display:flex;gap:12px;align-items:flex-start;background:var(--gold-50);border:1px solid #EADDC2;border-radius:var(--r-sm);padding:14px 16px;font-size:14.5px;color:#5E4B22}
+.note.em{background:var(--em-50);border-color:var(--em-100);color:var(--em-900)}
+.note.red{background:var(--danger-50);border-color:#EFD3CD;color:var(--danger)}
+
+table.cmp{width:100%;border-collapse:separate;border-spacing:0;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.cmp th,.cmp td{padding:14px 18px;text-align:right;border-bottom:1px solid var(--line-2);font-size:15px}
+.cmp tr:last-child td{border-bottom:0}
+.cmp thead th{background:var(--cream-2);font-family:var(--f-head);font-size:14px;color:var(--ink-2);font-weight:600}
+.cmp thead th:last-child{background:var(--em-800);color:#fff}
+.cmp td:first-child{color:var(--ink-3)}
+.cmp td:last-child{color:var(--em-900);font-weight:600;background:var(--em-50)}
+
+.arch{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.arch .card h4{font-size:15.5px;display:flex;gap:10px;align-items:center;margin-bottom:6px}
+.arch .card p,.arch .card li{font-size:14.5px;color:var(--ink-2)}
+.arch ul{margin:6px 0 0;padding-inline-start:18px}
+.roles{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px}
+.roles th,.roles td{border-bottom:1px solid var(--line-2);padding:9px 8px;text-align:right;vertical-align:top}
+.roles th{color:var(--ink-3);font-weight:500;font-size:13px}
+
+/* Buttons & forms */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:11px;padding:11px 20px;border:1px solid transparent;cursor:pointer;font-weight:600;font-size:15px;text-decoration:none;transition:background .15s,border-color .15s;white-space:nowrap}
+.btn svg.i{width:18px;height:18px}
+.btn.pri{background:var(--em-800);color:#fff}.btn.pri:hover{background:var(--em-900)}
+.btn.gold{background:var(--gold);color:#fff}.btn.gold:hover{background:#94733D}
+.btn.ghost{background:var(--paper);border-color:var(--line);color:var(--ink)}.btn.ghost:hover{border-color:var(--em-600);color:var(--em-800)}
+.btn.sm{padding:7px 13px;font-size:13.5px;border-radius:9px}
+.btn.danger{background:var(--paper);border-color:#E6C8C2;color:var(--danger)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+label.f{display:block;font-weight:600;font-size:14.5px;margin-bottom:6px;color:var(--ink)}
+label.f small{font-weight:400;color:var(--ink-3);margin-inline-start:6px}
+.in,select.in,textarea.in{width:100%;background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 13px;outline:none;transition:border-color .15s,box-shadow .15s}
+.in:focus{border-color:var(--em-600);box-shadow:0 0 0 3px var(--em-100)}
+textarea.in{min-height:92px;resize:vertical}
+.field{margin-bottom:18px}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg label{cursor:pointer}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg span{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:14.5px}
+.seg span svg.i{width:17px;height:17px;color:var(--em-700)}
+.seg input:checked+span{border-color:var(--em-700);background:var(--em-50);color:var(--em-900);font-weight:600}
+.seg input:focus-visible+span{box-shadow:0 0 0 3px var(--em-100)}
+.drop{border:1.5px dashed var(--gold-2);border-radius:var(--r);background:var(--gold-50);padding:22px;text-align:center;cursor:pointer;color:var(--ink-2);font-size:14.5px}
+.drop.over{background:var(--em-50);border-color:var(--em-600)}
+.files{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.file-row{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:14px}
+.file-row .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.file-row button{background:none;border:0;color:var(--danger);cursor:pointer}
+.share-layout{display:grid;grid-template-columns:1.6fr 1fr;gap:22px;align-items:start}
+.steps-mini{counter-reset:s}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;cursor:pointer}
+.check input{margin-top:6px;accent-color:var(--em-700);width:17px;height:17px}
+.err{color:var(--danger);font-size:13.5px;margin-top:5px;display:none}
+.field.bad .err{display:block}.field.bad .in{border-color:var(--danger)}
+
+/* Gallery */
+.filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:12px;margin-bottom:20px}
+.filters select{width:auto;min-width:160px;padding:8px 12px}
+.sectabs{display:flex;gap:6px;flex-wrap:wrap}
+.sectabs button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 14px;cursor:pointer;font-size:14px}
+.sectabs button[aria-pressed="true"]{background:var(--em-800);color:#fff;border-color:var(--em-800)}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.item{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;cursor:pointer;display:flex;flex-direction:column;text-align:right;padding:0;transition:border-color .15s,transform .15s}
+.item:hover{border-color:var(--gold-2);transform:translateY(-2px)}
+.item .thumb{aspect-ratio:16/10;background:var(--em-50);display:grid;place-items:center;color:var(--em-700);overflow:hidden}
+.item .thumb img{width:100%;height:100%;object-fit:cover}
+.item .thumb svg.i{width:40px;height:40px;stroke-width:1.3}
+.item .b{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px}
+.item h4{font-size:15.5px;line-height:1.6}
+.item .l{font-size:13.5px;color:var(--ink-3)}
+.item .tg{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.empty{text-align:center;padding:48px 20px;color:var(--ink-3);background:var(--paper);border:1px dashed var(--line);border-radius:var(--r)}
+.empty svg.i{width:38px;height:38px;color:var(--gold-2);margin-bottom:8px}
+.empty h4{color:var(--ink-2);font-size:16px;margin-bottom:4px}
+
+/* KPIs / charts */
+.kpi{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:18px 18px 16px;display:flex;flex-direction:column;gap:4px}
+.kpi .lab{font-size:13.5px;color:var(--ink-3)}
+.kpi .val{font-family:var(--f-head);font-size:30px;color:var(--em-900);line-height:1.3}
+.kpi .val small{font-size:15px;color:var(--ink-3);font-family:var(--f-body)}
+.kpi .tgt{font-size:13px;color:var(--ink-3);display:flex;align-items:center;gap:6px;border-top:1px dashed var(--line);padding-top:8px;margin-top:6px}
+.kpi .tgt i{width:10px;height:10px;border:1.5px dashed var(--gold);border-radius:3px;display:inline-block}
+.kpi .none{font-size:14px;color:var(--ink-3);font-family:var(--f-body)}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--ink-3);margin-bottom:10px}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.sw{width:14px;height:10px;border-radius:3px;display:inline-block}
+.sw.act{background:var(--em-700)}.sw.tg{border:1.5px dashed var(--gold);background:transparent}.sw.pre{background:var(--gold-2)}
+.bars{display:flex;flex-direction:column;gap:12px}
+.bar{display:grid;grid-template-columns:130px 1fr 70px;gap:12px;align-items:center;font-size:14px;background:none;border:0;padding:0;text-align:right;width:100%}
+button.bar{cursor:pointer}
+button.bar:hover .track-b{background:var(--em-100)}
+.track-b{position:relative;height:14px;background:var(--cream-2);border-radius:999px;overflow:visible;transition:background .15s}
+.fill{position:absolute;inset-block:0;inset-inline-start:0;background:var(--em-700);border-radius:999px;transition:width .6s ease}
+.tline{position:absolute;inset-block:-4px;width:0;border-inline-start:2px dashed var(--gold)}
+.bar .v{font-family:var(--f-head);color:var(--em-900);font-size:14px}
+.cols{display:flex;align-items:flex-end;gap:22px;height:200px;padding:10px 6px 0;border-bottom:1px solid var(--line)}
+.colg{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end}
+.colg .pair{display:flex;gap:6px;align-items:flex-end;height:100%;width:100%;justify-content:center}
+.colg .c{width:min(34px,40%);border-radius:7px 7px 0 0;position:relative;min-height:2px}
+.colg .c.pre{background:var(--gold-2)}.colg .c.post{background:var(--em-700)}
+.colg .c span{position:absolute;top:-22px;inset-inline:0;text-align:center;font-size:12px;color:var(--ink-2)}
+.colx{display:flex;gap:22px;padding:8px 6px 0}.colx div{flex:1;text-align:center;font-size:13.5px;color:var(--ink-2)}
+.ring{display:flex;align-items:center;gap:18px}
+.ring svg{width:120px;height:120px;transform:rotate(-90deg)}
+.status-line{font-size:13px;color:var(--ink-3);display:flex;align-items:center;gap:8px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--ink-3)}
+.dot.ok{background:#2E9C7E}.dot.warn{background:var(--gold)}.dot.bad{background:var(--danger)}
+
+/* Dashboard */
+.dash-layout{display:grid;grid-template-columns:220px 1fr;gap:24px;align-items:start}
+.side{position:sticky;top:88px;display:flex;flex-direction:column;gap:4px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:10px}
+.side button{display:flex;align-items:center;gap:10px;background:none;border:0;padding:10px 12px;border-radius:9px;cursor:pointer;text-align:right;color:var(--ink-2);font-weight:500}
+.side button:hover{background:var(--em-50)}
+.side button[aria-selected="true"]{background:var(--em-800);color:#fff}
+.side .cnt{margin-inline-start:auto;font-size:12px;background:var(--gold);color:#fff;border-radius:999px;padding:0 8px;min-width:22px;text-align:center}
+.qitem{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;margin-bottom:14px}
+.qitem .hd{display:flex;gap:12px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+.qitem h4{font-size:16.5px}
+.qitem .sub{font-size:13.5px;color:var(--ink-3);margin-top:2px}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px 18px;margin:12px 0;font-size:14px}
+.kv div span{color:var(--ink-3);display:block;font-size:12.5px}
+.rubric{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:12px 0;padding:12px;background:var(--cream);border-radius:10px}
+.rubric label{font-size:13.5px;color:var(--ink-2);display:flex;flex-direction:column;gap:4px}
+.rubric select{padding:7px 10px}
+.acts{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.tbl{width:100%;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.tbl th,.tbl td{padding:10px 12px;border-bottom:1px solid var(--line-2);text-align:right}
+.tbl th{background:var(--cream-2);font-weight:600;font-size:13px;color:var(--ink-2)}
+.tbl input{width:84px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:#fff}
+.tbl-wrap{overflow-x:auto}
+.toast{position:fixed;bottom:22px;inset-inline-start:50%;transform:translateX(50%);background:var(--em-900);color:#fff;padding:11px 20px;border-radius:12px;font-size:14.5px;z-index:60;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.on{opacity:1}
+dialog{border:0;border-radius:18px;padding:0;max-width:min(760px,94vw);width:100%;background:var(--paper);color:var(--ink)}
+dialog::backdrop{background:rgba(11,40,34,.45)}
+.dlg-h{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;padding:20px 22px;border-bottom:1px solid var(--line)}
+.dlg-b{padding:20px 22px;max-height:70vh;overflow:auto}
+.dlg-b img,.dlg-b video{max-width:100%;border-radius:10px;display:block;margin:0 auto 12px;background:#000}
+.x{background:none;border:0;cursor:pointer;color:var(--ink-3);padding:4px}
+.map-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px 16px}
+.mini{font-size:13px;color:var(--ink-3)}
+footer{border-top:1px solid var(--line);background:var(--paper);padding:26px 0;font-size:13.5px;color:var(--ink-3)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+@media (max-width:980px){
+  .gates,.grid3,.tracks{grid-template-columns:1fr 1fr}
+  .grid4{grid-template-columns:1fr 1fr}
+  .share-layout,.dash-layout{grid-template-columns:1fr}
+  .side{position:static;flex-direction:row;overflow-x:auto}
+  .side button{white-space:nowrap}
+  .arch{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .wrap{padding:0 16px}
+  .top .wrap{min-height:60px;flex-wrap:wrap;padding-top:8px;padding-bottom:6px;gap:8px}
+  nav.main{order:3;width:100%;margin:0}
+  .role{margin-inline-start:auto}
+  .brand small{display:none}
+  .gates,.grid3,.grid2,.tracks,.vm,.map-grid{grid-template-columns:1fr}
+  .gates{margin-top:-28px}
+  .bar{grid-template-columns:90px 1fr 56px}
+  .cmp th,.cmp td{padding:11px 12px;font-size:14px}
+  .phase{grid-template-columns:44px 1fr;padding:14px}
+  .phase .n{width:44px;height:44px;font-size:18px}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/><path d="M10 20v-6h4v6"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/><path d="M8 7h7M8 11h5"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7.5" height="7.5" rx="1.6"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.6"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.6"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.6"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4"/><path d="m7 9 5-5 5 5"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></symbol>
+    <symbol id="i-panel" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2.5"/><path d="M9 3v18M9 9h12"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5"/><circle cx="17" cy="9" r="2.4"/><path d="M16 14.6c2.8.1 5 2 5 5.4"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></symbol>
+    <symbol id="i-family" viewBox="0 0 24 24"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M12 18s-3.5-2-3.5-4.4A1.9 1.9 0 0 1 12 12.4a1.9 1.9 0 0 1 3.5 1.2C15.5 16 12 18 12 18z"/></symbol>
+    <symbol id="i-sprout" viewBox="0 0 24 24"><path d="M12 21v-9"/><path d="M12 12C12 7.5 8.5 5 4 5c0 4.5 3.5 7 8 7z"/><path d="M12 14c0-4 3-6.5 8-6.5 0 4-3 6.5-8 6.5z"/></symbol>
+    <symbol id="i-slides" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M12 16v4M8 20h8"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.8"/><path d="m21 16-5-5-8 9"/></symbol>
+    <symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="5" width="13" height="14" rx="2"/><path d="m16 10 5-3v10l-5-3"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H6a1.5 1.5 0 0 0-1.5 1.5v15A1.5 1.5 0 0 0 6 21h12a1.5 1.5 0 0 0 1.5-1.5V8.5z"/><path d="M14 3v5.5h5.5M8.5 13h7M8.5 17h5"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1"/></symbol>
+    <symbol id="i-cube" viewBox="0 0 24 24"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9z"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m11 6-6 6 6 6"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></symbol>
+    <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v13c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8v-13"/><path d="M4.5 12c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8"/></symbol>
+    <symbol id="i-sync" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.3-4.3L4 8.5"/><path d="M4 4v4.5h4.5"/><path d="M4 13a8 8 0 0 0 14.3 4.3l1.7-1.8"/><path d="M20 20v-4.5h-4.5"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v12"/><path d="m7 11 5 5 5-5"/><path d="M4 20h16"/></symbol>
+    <symbol id="i-inbox" viewBox="0 0 24 24"><path d="M3 13h5l1.5 3h5L16 13h5"/><path d="M5.5 5h13L21 13v6a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 19v-6z"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></symbol>
+    <symbol id="i-forms" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h1M11 8h5M8 12h1M11 12h5M8 16h1M11 16h5"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/></symbol>
+  </defs>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#home" aria-label="إثراء وأثر — الرئيسية">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 40 40" width="26" height="26"><path d="M20 6 31 12.5v15L20 34 9 27.5v-15z" fill="none" stroke="#C9AE7C" stroke-width="1.6"/><path d="M14 23.5c2.2-1.6 4-1.6 6 0s3.8 1.6 6 0M14 18.5c2.2-1.6 4-1.6 6 0s3.8 1.6 6 0" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/></svg>
+      </span>
+      <span><b>إثراء وأثر</b><small>من التعلم إلى إنتاج المعرفة</small></span>
+    </a>
+    <nav class="main" aria-label="التنقل الرئيس">
+      <a href="#home" data-r="home"><svg class="i"><use href="#i-home"/></svg>الرئيسية</a>
+      <a href="#about" data-r="about"><svg class="i"><use href="#i-book"/></svg>عن البرنامج</a>
+      <a href="#gallery" data-r="gallery"><svg class="i"><use href="#i-grid"/></svg>إنتاج المعرفة</a>
+      <a href="#impact" data-r="impact"><svg class="i"><use href="#i-chart"/></svg>قياس الأثر</a>
+      <a href="#share" data-r="share"><svg class="i"><use href="#i-upload"/></svg>شاركي بإنتاجك</a>
+      <a href="#dashboard" data-r="dashboard" id="navDash" hidden><svg class="i"><use href="#i-panel"/></svg>لوحة المعلمة</a>
+    </nav>
+    <span class="role" id="roleChip">جارٍ التحقق من الصلاحية…</span>
+  </div>
+</header>
+
+<main>
+<!-- ============ HOME ============ -->
+<section class="view" id="v-home">
+  <div class="hero">
+    <svg class="pattern" aria-hidden="true" width="100%" height="100%"><defs><pattern id="pt" width="56" height="56" patternUnits="userSpaceOnUse"><path d="M28 4 52 28 28 52 4 28z" fill="none" stroke="#C9AE7C" stroke-width="1"/><circle cx="28" cy="28" r="3" fill="none" stroke="#C9AE7C"/></pattern></defs><rect width="100%" height="100%" fill="url(#pt)"/></svg>
+    <div class="wrap">
+      <div class="eyebrow">نموذج للممارسات الإثرائية في التعليم العام</div>
+      <h1>إثراء وأثر</h1>
+      <p class="slogan">من التعلم إلى إنتاج المعرفة</p>
+      <p class="lead">برنامج إثرائي في مقرر الدراسات الإسلامية ينقل الطالبة من متلقية للمعرفة إلى منتجة لها: تصمّم الدرس، وتعلّم أقرانها، وتبحث وتبتكر، وتوظّف ما تعلمته في حياتها بشراكة مع أسرتها، ويُقاس أثر ذلك كله في نواتج التعلم.</p>
+      <div class="meta">
+        <span>الإدارة:<b>تعليم جدة</b></span>
+        <span>المدرسة:<b>المتوسطة الثالثة والسبعون</b></span>
+        <span>المادة:<b>الدراسات الإسلامية</b></span>
+        <span>الصف:<b>الثالث المتوسط</b></span>
+        <span>الفصول:<b><bdi>٣/٢</bdi>، <bdi>٣/٥</bdi>، <bdi>٣/٦</bdi>، <bdi>٣/٧</bdi></b></span>
+        <span>العام الدراسي:<b>١٤٤٨هـ</b></span>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="gates">
+      <a class="gate" href="#about">
+        <span class="ic"><svg class="i"><use href="#i-book"/></svg></span>
+        <span class="num">البوابة الأولى</span>
+        <h3>عن البرنامج</h3>
+        <p>الرؤية والرسالة والمبررات والأهداف، والمسارات الإثرائية الستة، والخطة التنفيذية بمراحلها.</p>
+        <span class="go">ادخلي البوابة <svg class="i" style="width:16px;height:16px"><use href="#i-arrow"/></svg></span>
+      </a>
+      <a class="gate" href="#gallery">
+        <span class="ic"><svg class="i"><use href="#i-grid"/></svg></span>
+        <span class="num">البوابة الثانية</span>
+        <h3>إنتاج المعرفة</h3>
+        <p>معرض رقمي متجدد لمنتجات الطالبات المعتمدة، مصنّف حسب الفصول الأربعة، مع تصفية بالدرس والمسار ونوع المشاركة.</p>
+        <span class="go" id="galleryCount">تصفّحي المعرض <svg class="i" style="width:16px;height:16px"><use href="#i-arrow"/></svg></span>
+      </a>
+      <a class="gate" href="#impact">
+        <span class="ic"><svg class="i"><use href="#i-chart"/></svg></span>
+        <span class="num">البوابة الثالثة</span>
+        <h3>قياس الأثر</h3>
+        <p>لوحة مؤشرات تُحدَّث من البيانات الفعلية: المشاركة، وجودة المنتجات، ونواتج التعلم، والشراكة الأسرية، والاستبانات.</p>
+        <span class="go">اطّلعي على المؤشرات <svg class="i" style="width:16px;height:16px"><use href="#i-arrow"/></svg></span>
+      </a>
+    </div>
+    <div class="cta">
+      <div class="t">
+        <h3>شاركي بإنتاجك المعرفي</h3>
+        <p>نافذة واحدة مختصرة: اسمك وفصلك والدرس والمسار، ثم أرفقي منتجك. تراجعه المعلمة وتعتمده ليظهر في المعرض دون اسمك.</p>
+      </div>
+      <a class="btn pri" href="#share"><svg class="i"><use href="#i-upload"/></svg>ابدئي المشاركة</a>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h"><div><h2>ما الذي يجعل البرنامج نموذجًا متميزًا؟</h2><p>تحوّل في دور كل طرف من أطراف العملية التعليمية، وفي طريقة توثيق الأثر وقياسه.</p></div></div>
+      <table class="cmp">
+        <thead><tr><th scope="col">الممارسة التقليدية</th><th scope="col">النموذج المقترح</th></tr></thead>
+        <tbody>
+          <tr><td>المعلمة تنتج المحتوى</td><td>الطالبة تنتج المعرفة</td></tr>
+          <tr><td>المعلمة تجمع الشواهد</td><td>الطالبة توثّق إنجازها</td></tr>
+          <tr><td>الأسرة متلقية للإعلانات</td><td>الأسرة شريكة في الإثراء</td></tr>
+          <tr><td>ملفات وشواهد متفرقة</td><td>منصة موحّدة ومتجددة</td></tr>
+          <tr><td>حصر الأنشطة المنفّذة</td><td>قياس أثر الأنشطة في التعلم</td></tr>
+          <tr><td>تقارير تُعدّ يدويًا</td><td>مؤشرات تُحدَّث من البيانات الفعلية</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="view" id="v-about">
+  <div class="wrap">
+    <div class="page-h"><div class="crumb">البوابة الأولى</div><h1>عن البرنامج</h1><p>برنامج إثرائي لا علاجي، يُدمج في الممارسات الصفية اليومية دون أن يحمّل المعلمة أو الطالبة أعباء إضافية.</p></div>
+    <div class="tabs" role="tablist" data-tabs="about">
+      <button role="tab" data-p="a-vision" aria-selected="true">الرؤية والرسالة</button>
+      <button role="tab" data-p="a-why">المبررات والأهداف</button>
+      <button role="tab" data-p="a-tracks">المسارات الإثرائية</button>
+      <button role="tab" data-p="a-plan">الخطة التنفيذية</button>
+      <button role="tab" data-p="a-tech">كيف تعمل المنصة</button>
+    </div>
+
+    <div class="pane on" id="a-vision">
+      <div class="vm">
+        <div class="card em"><div class="k">الرؤية</div><div class="v">طالبةٌ منتجةٌ للمعرفة، معتزّةٌ بقيمها، مؤثّرةٌ في محيطها.</div></div>
+        <div class="card"><div class="k">الرسالة</div><div class="v" style="font-size:16.5px">تمكين طالبات الصف الثالث المتوسط من إنتاج المعرفة في الدراسات الإسلامية وتوظيفها في الحياة، عبر ممارسات إثرائية مدمجة في التعلم اليومي، وشراكة فاعلة مع الأسرة، وقياس منهجي للأثر في نواتج التعلم.</div></div>
+      </div>
+      <div class="sec" style="padding-top:28px">
+        <div class="sec-h"><h2 style="font-size:21px">فلسفة البرنامج</h2></div>
+        <div class="grid3">
+          <div class="card"><h4 style="font-size:16px;margin-bottom:6px">من التلقي إلى الإنتاج</h4><p class="mini" style="font-size:14.5px;color:var(--ink-2)">تصمّم الطالبة الدروس، وتعلّم أقرانها، وتبحث وتستقصي، وتبتكر، وتوظّف المعرفة في حياتها.</p></div>
+          <div class="card"><h4 style="font-size:16px;margin-bottom:6px">إثراء مدمج لا عبء مضاف</h4><p class="mini" style="font-size:14.5px;color:var(--ink-2)">تُنفّذ الممارسات داخل الحصة المعتادة وضمن الواجبات القائمة، والمنصة توثّق ذلك تلقائيًا.</p></div>
+          <div class="card"><h4 style="font-size:16px;margin-bottom:6px">أثر يُقاس لا نشاط يُحصى</h4><p class="mini" style="font-size:14.5px;color:var(--ink-2)">يُحكم على البرنامج بجودة المنتجات وتحسّن نواتج التعلم، لا بعدد الأنشطة أو بالتكريم.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pane" id="a-why">
+      <div class="grid2">
+        <div class="card">
+          <h3 style="font-size:19px;margin-bottom:6px">المبررات</h3>
+          <ol class="clean reasons">
+            <li><span class="badge-n">١</span><span>حاجة الطالبة إلى مهارات التفكير العليا والإنتاج، لا الاكتفاء بالحفظ والاستقبال.</span></li>
+            <li><span class="badge-n">٢</span><span>الطبيعة القيمية لمقرر الدراسات الإسلامية التي تتطلب ربط المعرفة بالسلوك والحياة اليومية.</span></li>
+            <li><span class="badge-n">٣</span><span>الاتساق مع توجهات رؤية المملكة ٢٠٣٠ في بناء مهارات المستقبل وتعزيز القيم.</span></li>
+            <li><span class="badge-n">٤</span><span>تشتّت الشواهد في ملفات متفرقة، وصعوبة قياس أثر الممارسات الإثرائية في التعلم.</span></li>
+            <li><span class="badge-n">٥</span><span>محدودية دور الأسرة في التعلم واقتصاره غالبًا على تلقي الإعلانات.</span></li>
+          </ol>
+        </div>
+        <div class="card">
+          <h3 style="font-size:19px;margin-bottom:6px">الأهداف</h3>
+          <ol class="clean goals">
+            <li><span class="badge-n">١</span><span>أن تصمّم الطالبة درسًا أو جزءًا منه وتقدّمه لأقرانها بإتقان.</span></li>
+            <li><span class="badge-n">٢</span><span>تنمية مهارات البحث والاستقصاء والرجوع إلى المصادر الموثوقة.</span></li>
+            <li><span class="badge-n">٣</span><span>إنتاج منتجات معرفية ورقمية مبتكرة مرتبطة بدروس المقرر.</span></li>
+            <li><span class="badge-n">٤</span><span>تفعيل الأسرة شريكًا في الإثراء والتطبيق.</span></li>
+            <li><span class="badge-n">٥</span><span>توظيف المعرفة الشرعية في مواقف حياتية واقعية.</span></li>
+            <li><span class="badge-n">٦</span><span>قياس أثر الممارسات في نواتج التعلم ببيانات فعلية متكافئة.</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="pane" id="a-tracks"><div class="tracks" id="tracksGrid"></div></div>
+
+    <div class="pane" id="a-plan">
+      <div class="note" style="margin-bottom:16px"><svg class="i"><use href="#i-star"/></svg><span>الخطة مرنة تُكيَّف مع تقويم العام الدراسي. <b>التكريم إجراء ختامي</b> في المرحلة السادسة، وليس هدفًا للبرنامج ولا مؤشرًا لنجاحه.</span></div>
+      <div class="phases" id="phases"></div>
+    </div>
+
+    <div class="pane" id="a-tech">
+      <div class="note em" style="margin-bottom:16px" id="techStatus"><svg class="i"><use href="#i-db"/></svg><span>جارٍ التحقق من اتصال قاعدة البيانات…</span></div>
+      <div class="arch">
+        <div class="card"><h4><svg class="i"><use href="#i-db"/></svg>حفظ البيانات</h4><p>تُحفظ المشاركات والتقييمات والإعدادات في قاعدة بيانات المنصة نفسها (مستودع مستندات مستضاف على Claude)، لا في متصفح الجهاز. كل طالبة تكتب في سجلها الخاص فقط، وتقرأ المعلمة جميع السجلات.</p></div>
+        <div class="card"><h4><svg class="i"><use href="#i-upload"/></svg>استقبال الملفات</h4><p>تُرفع الصور والفيديو وملفات PDF مباشرة إلى مخزن المنصة (حتى ٢٠ ميجابايت للملف). العروض التقديمية تُحفظ PDF أو تُرفق برابط (OneDrive أو Padlet أو YouTube)، وكذلك المقاطع الكبيرة.</p></div>
+        <div class="card"><h4><svg class="i"><use href="#i-sync"/></svg>المزامنة بين الأجهزة</h4><p>البيانات مركزية وتُبثّ مباشرة؛ ما تعتمده المعلمة من الآيباد يظهر فورًا في المعرض على الجوال والحاسب دون إعادة رفع أو إدخال.</p></div>
+        <div class="card"><h4><svg class="i"><use href="#i-forms"/></svg>التكامل مع أدوات المدرسة</h4><p>يمكن جمع المشاركات عبر Microsoft Forms ثم استيراد ملف النتائج (Excel أو CSV) من لوحة المعلمة بنقرة؛ وتُستورد نتائج الاستبانات بالطريقة نفسها. روابط Padlet وOneDrive مقبولة كمرفقات.</p></div>
+        <div class="card" style="grid-column:1/-1"><h4><svg class="i"><use href="#i-lock"/></svg>الصلاحيات وحماية البيانات</h4>
+          <table class="roles">
+            <thead><tr><th>الدور</th><th>مستوى المشاركة في المنصة</th><th>ما يمكنه فعله</th></tr></thead>
+            <tbody>
+              <tr><td><b>المعلمة</b></td><td>مالكة / محرّرة</td><td>تراجع المشاركات وتقيّمها وتعتمدها، وتُدخل بيانات التقويم والاستبانات، وتصدّر التقارير، وترى الأسماء.</td></tr>
+              <tr><td><b>الطالبة</b></td><td>مساهِمة (Contributor)</td><td>ترسل مشاركاتها وترى حالتها وتقييمها فقط، ولا ترى سجلات زميلاتها.</td></tr>
+              <tr><td><b>الرئيس المباشر</b></td><td>مُشاهِد (Viewer)</td><td>يطّلع على المعرض المعتمد ولوحة المؤشرات المجمّعة، دون أسماء أو بيانات شخصية.</td></tr>
+            </tbody>
+          </table>
+          <p style="margin-top:10px">لا تظهر أسماء الطالبات أو أولياء الأمور في المعرض أو المؤشرات العامة إطلاقًا؛ يُعرض المنتج منسوبًا إلى الفصل فقط. لا يُطلب اسم ولي الأمر أصلًا.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section class="view" id="v-gallery">
+  <div class="wrap">
+    <div class="page-h"><div class="crumb">البوابة الثانية</div><h1>إنتاج المعرفة</h1><p>منتجات الطالبات بعد مراجعتها واعتمادها، تُعرض منسوبة إلى الفصل دون أسماء.</p></div>
+    <div class="filters" role="search">
+      <div class="sectabs" id="secTabs" aria-label="الفصل"></div>
+      <select class="in" id="fLesson" aria-label="الدرس"><option value="">كل الدروس</option></select>
+      <select class="in" id="fTrack" aria-label="المسار"><option value="">كل المسارات</option></select>
+      <select class="in" id="fType" aria-label="نوع المشاركة"><option value="">كل الأنواع</option></select>
+      <span class="mini" id="galInfo" style="margin-inline-start:auto"></span>
+    </div>
+    <div class="gal" id="gal"></div>
+  </div>
+</section>
+
+<!-- ============ IMPACT ============ -->
+<section class="view" id="v-impact">
+  <div class="wrap">
+    <div class="page-h"><div class="crumb">البوابة الثالثة</div><h1>قياس الأثر</h1><p>كل رقم هنا محسوب من بيانات مسجّلة فعلًا. المستهدفات تظهر بخط ذهبي متقطع ومنفصلة عن النتائج المحققة، وما لم تُسجَّل بياناته يظهر فارغًا.</p></div>
+    <div class="status-line" id="impStatus" style="margin-bottom:14px"><span class="dot"></span><span>جارٍ التحميل…</span></div>
+    <div class="legend"><span><i class="sw act"></i>النتيجة الفعلية</span><span><i class="sw tg"></i>المستهدف</span><span><i class="sw pre"></i>التقويم القبلي</span></div>
+    <div class="grid4" id="kpis"></div>
+
+    <div class="grid2 sec" style="padding-top:22px">
+      <div class="card"><h3 style="font-size:17px;margin-bottom:4px">المشاركة حسب الفصل</h3><p class="mini" style="margin-bottom:14px">انقري على أي فصل لعرض منتجاته في المعرض.</p><div class="bars" id="chSec"></div></div>
+      <div class="card"><h3 style="font-size:17px;margin-bottom:4px">المنتجات حسب المسار الإثرائي</h3><p class="mini" style="margin-bottom:14px">انقري على المسار لعرض منتجاته.</p><div class="bars" id="chTrack"></div></div>
+    </div>
+    <div class="grid2" style="margin-top:18px">
+      <div class="card"><h3 style="font-size:17px;margin-bottom:4px">جودة المنتجات المعرفية</h3><p class="mini" style="margin-bottom:14px">متوسط تقييم المعلمة على سلّم من ٤ مستويات، محوّلًا إلى نسبة.</p><div class="bars" id="chQual"></div></div>
+      <div class="card"><h3 style="font-size:17px;margin-bottom:4px">نواتج التعلم: القبلي والبعدي</h3><p class="mini" style="margin-bottom:6px">تُعرض المقارنة فقط للفصول ذات البيانات المتكافئة (الأداة نفسها والعدد نفسه).</p><div id="chPrePost"></div></div>
+    </div>
+    <div class="grid2" style="margin-top:18px">
+      <div class="card"><h3 style="font-size:17px;margin-bottom:12px">نتائج الاستبانات</h3><div id="chSurvey"></div></div>
+      <div class="card"><h3 style="font-size:17px;margin-bottom:12px">التقرير الختامي</h3><div id="reportBox"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SHARE ============ -->
+<section class="view" id="v-share">
+  <div class="wrap">
+    <div class="page-h"><div class="crumb">نظام المشاركة الذاتية</div><h1>شاركي بإنتاجك المعرفي</h1><p>دقيقتان تكفيان. بعد الإرسال تراجع المعلمة مشاركتك، وعند اعتمادها تظهر في المعرض باسم فصلك دون اسمك.</p></div>
+    <div id="shareGate"></div>
+    <div class="share-layout" id="shareLayout">
+      <form class="card" id="shareForm" novalidate style="padding:26px">
+        <div class="grid2">
+          <div class="field" data-f="name"><label class="f" for="sName">اسمك الثلاثي <small>لا يظهر للعموم</small></label><input class="in" id="sName" autocomplete="name" maxlength="80"><div class="err">اكتبي اسمك</div></div>
+          <div class="field" data-f="section"><label class="f">فصلك</label><div class="seg" id="sSection"></div><div class="err">اختاري فصلك</div></div>
+        </div>
+        <div class="grid2">
+          <div class="field" data-f="lesson"><label class="f" for="sLesson">عنوان الدرس</label><input class="in" id="sLesson" list="lessonList" maxlength="120" placeholder="كما ورد في كتاب الطالبة"><datalist id="lessonList"></datalist><div class="err">اكتبي عنوان الدرس</div></div>
+          <div class="field" data-f="title"><label class="f" for="sTitle">عنوان منتجك</label><input class="in" id="sTitle" maxlength="120" placeholder="اسم قصير يصف ما أنتجتِه"><div class="err">اكتبي عنوانًا لمنتجك</div></div>
+        </div>
+        <div class="field" data-f="track"><label class="f">المسار الإثرائي</label><div class="seg" id="sTrack"></div><div class="err">اختاري المسار</div></div>
+        <div class="field" data-f="ptype"><label class="f">نوع المشاركة</label><div class="seg" id="sType"></div><div class="err">اختاري نوع المشاركة</div></div>
+        <div class="field" data-f="attach">
+          <label class="f">أرفقي منتجك <small>صور، فيديو، PDF — حتى ٢٠ ميجابايت للملف، وبحد أقصى ٣ ملفات</small></label>
+          <div class="drop" id="drop" tabindex="0" role="button" aria-label="اختيار ملفات">
+            <svg class="i" style="width:28px;height:28px;color:var(--gold)"><use href="#i-upload"/></svg>
+            <div>اسحبي الملفات هنا أو <b style="color:var(--em-700)">اختاري من جهازك</b></div>
+            <div class="mini">العرض التقديمي: احفظيه PDF، أو ضعي رابطه في الخانة التالية</div>
+          </div>
+          <input type="file" id="sFiles" multiple accept="image/*,video/*,application/pdf" hidden>
+          <div class="files" id="fileList"></div>
+          <label class="f" for="sLink" style="margin-top:12px;font-weight:500">أو رابط المنتج <small>OneDrive أو Padlet أو YouTube</small></label><input class="in" id="sLink" inputmode="url" dir="ltr" placeholder="https://">
+          <div class="err">أرفقي ملفًا أو رابطًا يبدأ بـ https://</div>
+        </div>
+        <div class="field"><label class="f" for="sDesc">وصف مختصر <small>اختياري</small></label><textarea class="in" id="sDesc" maxlength="500" placeholder="ماذا يقدّم منتجك؟ ولمن؟"></textarea></div>
+        <div class="field">
+          <label class="f">المساهمة الأسرية</label>
+          <label class="check"><input type="checkbox" id="sFam"> شاركتني أسرتي في هذا المنتج</label>
+          <input class="in" id="sFamKind" style="margin-top:10px;display:none" maxlength="200" placeholder="كيف شاركت أسرتك؟ (حوار، تطبيق، تصوير، مراجعة…) — دون ذكر أسماء">
+        </div>
+        <div class="field" data-f="gained"><label class="f" for="sGained">ماذا اكتسبتِ من هذه المشاركة؟</label><textarea class="in" id="sGained" maxlength="500" placeholder="مهارة، أو قيمة، أو فهم جديد…"></textarea><div class="err">اكتبي جملة واحدة على الأقل</div></div>
+        <label class="check" style="margin-bottom:20px"><input type="checkbox" id="sConsent" checked> أوافق على عرض منتجي في معرض المنصة بعد اعتماده، منسوبًا إلى فصلي دون اسمي.</label>
+        <div class="acts"><button class="btn pri" type="submit" id="sSubmit"><svg class="i"><use href="#i-upload"/></svg>إرسال المشاركة</button><span class="mini" id="sProgress"></span></div>
+      </form>
+      <aside>
+        <div class="card" style="margin-bottom:16px">
+          <h3 style="font-size:17px;margin-bottom:10px">ماذا يحدث بعد الإرسال؟</h3>
+          <ol class="clean goals" style="font-size:14.5px">
+            <li><span class="badge-n">١</span><span>تُحفظ مشاركتك فورًا في سجلك الخاص.</span></li>
+            <li><span class="badge-n">٢</span><span>تراجعها المعلمة وتقيّم جودتها.</span></li>
+            <li><span class="badge-n">٣</span><span>عند اعتمادها تظهر في المعرض باسم فصلك.</span></li>
+          </ol>
+        </div>
+        <div class="card"><h3 style="font-size:17px;margin-bottom:10px">مشاركاتي</h3><div id="mine"><p class="mini">ستظهر مشاركاتك وحالتها هنا.</p></div></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DASHBOARD ============ -->
+<section class="view" id="v-dashboard">
+  <div class="wrap">
+    <div class="page-h"><div class="crumb">خاص بالمعلمة</div><h1>لوحة التحكم</h1><p>إشراف على الإنتاج لا إدخال له: المشاركات تصل من الطالبات مباشرة، ودورك المراجعة والتقييم والاعتماد.</p></div>
+    <div id="dashGate"></div>
+    <div class="dash-layout" id="dashLayout" hidden>
+      <div class="side" role="tablist" data-tabs="dash">
+        <button role="tab" data-p="d-overview" aria-selected="true"><svg class="i"><use href="#i-chart"/></svg>نظرة عامة</button>
+        <button role="tab" data-p="d-queue"><svg class="i"><use href="#i-inbox"/></svg>بانتظار الاعتماد<span class="cnt" id="qCnt">٠</span></button>
+        <button role="tab" data-p="d-all"><svg class="i"><use href="#i-grid"/></svg>كل المشاركات</button>
+        <button role="tab" data-p="d-assess"><svg class="i"><use href="#i-target"/></svg>التقويم والاستبانات</button>
+        <button role="tab" data-p="d-import"><svg class="i"><use href="#i-forms"/></svg>استيراد من Forms</button>
+        <button role="tab" data-p="d-settings"><svg class="i"><use href="#i-panel"/></svg>المستهدفات والإعداد</button>
+        <button role="tab" data-p="d-export"><svg class="i"><use href="#i-down"/></svg>التصدير والتقارير</button>
+      </div>
+      <div>
+        <div class="pane on" id="d-overview">
+          <div class="grid4" id="dKpis"></div>
+          <div class="grid2" style="margin-top:18px">
+            <div class="card"><h3 style="font-size:16.5px;margin-bottom:12px">المشاركات والطالبات لكل فصل</h3><div class="legend"><span><i class="sw act"></i>عدد المشاركات</span><span><i class="sw pre"></i>طالبات دون تكرار</span></div><div class="bars" id="dSec"></div></div>
+            <div class="card"><h3 style="font-size:16.5px;margin-bottom:12px">تصنيف المنتجات حسب المسارات</h3><div class="bars" id="dTrack"></div></div>
+          </div>
+          <div class="card" style="margin-top:18px">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+              <div><h3 style="font-size:16.5px">مؤشرات العرض العام</h3><p class="mini" id="pubInfo">—</p></div>
+              <button class="btn ghost sm" id="pubBtn"><svg class="i"><use href="#i-sync"/></svg>تحديث المؤشرات للرئيس المباشر</button>
+            </div>
+            <p class="mini" style="margin-top:6px">ينشر نسخة مجمّعة بلا أسماء يراها أصحاب صلاحية المشاهدة. تُحدَّث تلقائيًا عند كل اعتماد أو حفظ تقويم.</p>
+          </div>
+        </div>
+        <div class="pane" id="d-queue"><div id="queue"></div></div>
+        <div class="pane" id="d-all">
+          <div class="filters"><select class="in" id="aSec"><option value="">كل الفصول</option></select><select class="in" id="aStatus"><option value="">كل الحالات</option><option value="pending">بانتظار الاعتماد</option><option value="approved">معتمدة</option><option value="returned">أُعيدت للتحسين</option></select><input class="in" id="aQ" placeholder="بحث بالاسم أو الدرس" style="max-width:240px"></div>
+          <div class="tbl-wrap"><table class="tbl" id="allTbl"></table></div>
+        </div>
+        <div class="pane" id="d-assess">
+          <div class="card" style="margin-bottom:18px">
+            <h3 style="font-size:16.5px">التقويم القبلي والبعدي</h3>
+            <p class="mini" style="margin:4px 0 12px">أدخلي المتوسطات كنسب مئوية. لا تُعرض المقارنة إلا إذا تساوى عدد الطالبات في التقويمين وتأكّدتِ من تكافؤ الأداة.</p>
+            <div class="tbl-wrap"><table class="tbl" id="assessTbl"></table></div>
+            <div class="acts" style="margin-top:12px"><button class="btn pri sm" id="saveAssess">حفظ بيانات التقويم</button><span class="mini" id="assessMsg"></span></div>
+          </div>
+          <div class="card">
+            <h3 style="font-size:16.5px">نتائج الاستبانات</h3>
+            <p class="mini" style="margin:4px 0 12px">صدّري نتائج الاستبانة من Microsoft Forms (Excel أو CSV) ثم ارفعيها هنا. تُحسب متوسطات العبارات ذات الإجابات المتدرجة (١–٥ أو موافق بشدة… غير موافق بشدة) تلقائيًا.</p>
+            <div class="acts"><select class="in" id="survAud" style="width:auto"><option value="students">استبانة الطالبات</option><option value="families">استبانة الأسر</option></select><button class="btn ghost sm" id="survBtn"><svg class="i"><use href="#i-upload"/></svg>رفع ملف الاستبانة</button><input type="file" id="survFile" accept=".xlsx,.xls,.csv" hidden><span class="mini" id="survMsg"></span></div>
+            <div id="survPreview" style="margin-top:12px"></div>
+          </div>
+        </div>
+        <div class="pane" id="d-import">
+          <div class="card">
+            <h3 style="font-size:16.5px">استيراد مشاركات من Microsoft Forms</h3>
+            <p class="mini" style="margin:4px 0 12px">للطالبات اللواتي لا يملكن حسابًا في المنصة: أنشئي نموذجًا في Forms بالأسئلة التالية، ثم نزّلي ملف الردود وارفعيه هنا. تدخل المشاركات قائمة المراجعة مباشرة دون إعادة إدخال، ويُتجاهل المكرر تلقائيًا.</p>
+            <div class="note em" style="margin-bottom:14px;font-size:14px"><span><b>أسئلة النموذج المقترحة:</b> الاسم الثلاثي · الفصل (٣/٢، ٣/٥، ٣/٦، ٣/٧) · عنوان الدرس · عنوان المنتج · المسار الإثرائي · نوع المشاركة · رفع ملف المنتج أو رابطه · هل شاركت الأسرة؟ · كيف شاركت الأسرة؟ · ماذا اكتسبتِ؟</span></div>
+            <div class="acts"><button class="btn ghost sm" id="impBtn"><svg class="i"><use href="#i-upload"/></svg>رفع ملف الردود (Excel / CSV)</button><input type="file" id="impFile" accept=".xlsx,.xls,.csv" hidden><span class="mini" id="impMsg"></span></div>
+            <div id="impMap" style="margin-top:16px"></div>
+          </div>
+        </div>
+        <div class="pane" id="d-settings">
+          <div class="card" style="margin-bottom:18px">
+            <h3 style="font-size:16.5px">عدد الطالبات في كل فصل</h3>
+            <p class="mini" style="margin:4px 0 12px">يُستخدم لحساب نسبة المشاركة الفعلية.</p>
+            <div class="grid4" id="enrollIn"></div>
+          </div>
+          <div class="card" style="margin-bottom:18px">
+            <h3 style="font-size:16.5px">المستهدفات</h3>
+            <p class="mini" style="margin:4px 0 12px">تظهر في لوحة الأثر بوصفها مستهدفات فقط. اتركي الخانة فارغة إن لم تحدّدي مستهدفًا؛ القيم الرمادية اقتراحات لا تُحفظ ما لم تكتبيها.</p>
+            <div class="grid2" id="targetsIn"></div>
+          </div>
+          <div class="card" style="margin-bottom:18px">
+            <h3 style="font-size:16.5px">المرحلة الحالية من الخطة</h3>
+            <select class="in" id="phaseIn" style="max-width:420px;margin-top:10px"></select>
+          </div>
+          <button class="btn pri" id="saveCfg">حفظ الإعدادات</button> <span class="mini" id="cfgMsg"></span>
+        </div>
+        <div class="pane" id="d-export">
+          <div class="grid3">
+            <div class="card"><h4 style="font-size:15.5px;margin-bottom:6px">سجل المشاركات الكامل</h4><p class="mini" style="margin-bottom:12px">ملف CSV يفتح في Excel، يتضمن الأسماء والتقييمات. للاستخدام الداخلي.</p><button class="btn ghost sm" data-exp="all"><svg class="i"><use href="#i-down"/></svg>تنزيل</button></div>
+            <div class="card"><h4 style="font-size:15.5px;margin-bottom:6px">ملخص المؤشرات</h4><p class="mini" style="margin-bottom:12px">ملف CSV بالمؤشرات المجمّعة دون أسماء، مناسب لمشاركته مع الإدارة.</p><button class="btn ghost sm" data-exp="kpi"><svg class="i"><use href="#i-down"/></svg>تنزيل</button></div>
+            <div class="card"><h4 style="font-size:15.5px;margin-bottom:6px">التقرير الختامي</h4><p class="mini" style="margin-bottom:12px">تقرير منسّق (HTML قابل للطباعة PDF) مبني من البيانات الفعلية فقط.</p><button class="btn ghost sm" data-exp="report"><svg class="i"><use href="#i-down"/></svg>تنزيل</button></div>
+          </div>
+          <p class="mini" style="margin-top:12px" id="expMsg"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap"><span>إعداد وتنفيذ: المعلمة دلال صلاح · مديرة المدرسة: ثريا الفيصل</span><span>المتوسطة الثالثة والسبعون — تعليم جدة · ١٤٤٨هـ</span></div></footer>
+
+<dialog id="dlg"><div class="dlg-h"><div><h3 id="dlgT" style="font-size:18px"></h3><p class="mini" id="dlgS"></p></div><button class="x" id="dlgX" aria-label="إغلاق"><svg class="i"><use href="#i-x"/></svg></button></div><div class="dlg-b" id="dlgB"></div></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+"use strict";
+/* ---------- Constants ---------- */
+const SECTIONS=[{id:"3-2",l:"٣/٢"},{id:"3-5",l:"٣/٥"},{id:"3-6",l:"٣/٦"},{id:"3-7",l:"٣/٧"}];
+const TRACKS=[
+ {id:"t1",n:"هندسة المعرفة وتصميم الدروس",ic:"layers",d:"تصمّم الطالبة درسًا أو جزءًا منه: أهدافه وخريطته المفاهيمية ووسائله وتقويمه.",ex:["خريطة درس","عرض تقديمي","بطاقات مفاهيم"]},
+ {id:"t2",n:"قيادة التعلم وتعليم الأقران",ic:"users",d:"تشرح الطالبة لأقرانها، وتقود مجموعة تعلم، وتدير نقاشًا صفيًا حول قضية من الدرس.",ex:["شرح درس","قيادة مجموعة","تقويم أقران"]},
+ {id:"t3",n:"البحث والاستقصاء",ic:"search",d:"تطرح الطالبة سؤالًا وتتتبّع إجابته في المصادر الموثوقة، وتوثّق ما توصلت إليه.",ex:["ورقة بحثية مصغرة","استقصاء مسألة","تلخيص مصدر"]},
+ {id:"t4",n:"الابتكار المعرفي والرقمي",ic:"bulb",d:"تحوّل الطالبة المعرفة إلى منتج رقمي أو إبداعي جديد يخدم تعلم الآخرين.",ex:["إنفوجرافيك","مقطع قصير","لعبة تعليمية"]},
+ {id:"t5",n:"الشراكة الأسرية",ic:"family",d:"تنقل الطالبة ما تعلمته إلى أسرتها، وتُشركها في تطبيقه أو إثرائه بنشاط مشترك.",ex:["نشاط أسري","حوار قيمي","مشروع مشترك"]},
+ {id:"t6",n:"المعرفة والحياة",ic:"sprout",d:"توظّف الطالبة المعرفة الشرعية في موقف حياتي أو مبادرة سلوكية واقعية.",ex:["مبادرة سلوكية","تطبيق عملي","حملة توعوية"]}
+];
+const TYPES=[{id:"slides",n:"عرض تقديمي",ic:"slides"},{id:"image",n:"صورة / إنفوجرافيك",ic:"image"},{id:"video",n:"فيديو",ic:"video"},{id:"doc",n:"ملف / بحث",ic:"file"},{id:"link",n:"رابط",ic:"link"},{id:"model",n:"نموذج أو مجسّم مصوّر",ic:"cube"}];
+const PHASES=[
+ {n:"الانطلاقة الفعلية",d:"تنتج الطالبات الدروس ويشرحنها ويعلّمن أقرانهن، داخل الحصص المعتادة.",o:"دروس من إنتاج الطالبات، جلسات تعليم أقران",m:"عدد المشاركات في مساري التصميم وتعليم الأقران"},
+ {n:"تنظيم الفرص الإثرائية وتفعيل الشراكة الأسرية",d:"توزيع الفرص على المسارات الستة بعدالة، وإطلاق أنشطة أسرية مرتبطة بالدروس.",o:"خريطة فرص إثرائية، أنشطة أسرية",m:"نسبة المشاركات ذات المساهمة الأسرية"},
+ {n:"توسيع الإنتاج المعرفي",d:"تنويع المنتجات وأنواعها، واستيعاب طالبات لم يشاركن بعد.",o:"منتجات متنوعة في جميع المسارات",m:"نسبة الطالبات المشاركات دون تكرار"},
+ {n:"الابتكار والتطبيق",d:"منتجات رقمية مبتكرة، ومبادرات توظّف المعرفة في الحياة.",o:"منتجات رقمية، مبادرات سلوكية",m:"متوسط جودة المنتجات"},
+ {n:"قياس الأثر وتحليل النتائج",d:"تطبيق التقويم البعدي المكافئ للقبلي، والاستبانات، وتحليل البيانات.",o:"بيانات قبلية وبعدية متكافئة، نتائج الاستبانات",m:"الفرق بين القبلي والبعدي، ونسبة الإتقان"},
+ {n:"الحصاد والتوثيق والتكريم والاستدامة",d:"إصدار التقرير الختامي من البيانات، وتوثيق الممارسة، وتكريم ختامي، وخطة استدامة للعام التالي.",o:"التقرير الختامي، أرشيف المعرض",m:"اكتمال التوثيق، وقرار الاستدامة",honor:true}
+];
+const CRIT=[{k:"acc",n:"الدقة العلمية والشرعية"},{k:"orig",n:"الأصالة والإبداع"},{k:"clar",n:"وضوح العرض والتنظيم"},{k:"life",n:"التوظيف والأثر في الحياة"}];
+const LEVELS=["","١ — مبتدئ","٢ — نامٍ","٣ — متمكّن","٤ — متميّز"];
+const TARGETS=[
+ {k:"participation",n:"نسبة الطالبات المشاركات",u:"%",sug:80},
+ {k:"quality",n:"متوسط جودة المنتجات",u:"%",sug:75},
+ {k:"family",n:"نسبة المشاركات ذات المساهمة الأسرية",u:"%",sug:30},
+ {k:"mastery",n:"نسبة الإتقان في التقويم البعدي",u:"%",sug:85},
+ {k:"satisfaction",n:"متوسط رضا الطالبات (من ٥)",u:"/5",sug:4}
+];
+const ST={pending:{n:"بانتظار الاعتماد",c:""},approved:{n:"معتمدة",c:"em"},returned:{n:"أُعيدت للتحسين",c:"red"}};
+
+/* ---------- Helpers ---------- */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const NF=new Intl.NumberFormat("ar-SA-u-nu-arab",{maximumFractionDigits:1});
+const num=(n,d=0)=>(n==null||!isFinite(n))?"—":new Intl.NumberFormat("ar-SA-u-nu-arab",{maximumFractionDigits:d,minimumFractionDigits:0}).format(n);
+const pct=(n,d=0)=>(n==null||!isFinite(n))?"—":num(n,d)+"٪";
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const ic=(n,st="")=>`<svg class="i" ${st?`style="${st}"`:""}><use href="#i-${n}"/></svg>`;
+const secL=id=>(SECTIONS.find(s=>s.id===id)||{}).l||"—";
+const trk=id=>TRACKS.find(t=>t.id===id);
+const typ=id=>TYPES.find(t=>t.id===id);
+const toLatin=s=>String(s??"").replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/[۰-۹]/g,d=>"۰۱۲۳۴۵۶۷۸۹".indexOf(d));
+const safeUrl=u=>(typeof u==="string"&&/^https:\/\//i.test(u.trim()))?u.trim():"";
+const rid=()=>"e"+Date.now().toString(36)+Math.random().toString(36).slice(2,8);
+const fmtDate=t=>t?new Intl.DateTimeFormat("ar-SA-u-ca-islamic-umalqura-nu-arab",{day:"numeric",month:"long",hour:"numeric",minute:"2-digit"}).format(new Date(t)):"—";
+function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove("on"),3200)}
+const blobUrl=f=>f&&f.id?("/_blob/"+encodeURIComponent(f.id)):"";
+
+/* ---------- State ---------- */
+const S={role:"loading",db:null,user:null,assets:null,downloads:null,uid:null,
+  gallery:[],galLoaded:false,stats:null,config:{},inbox:[],inboxLoaded:false,myDoc:null,assess:{},
+  connected:false,files:[],gf:{sec:"",lesson:"",track:"",type:""},lastPub:null};
+
+/* ---------- Routing ---------- */
+const ROUTES=["home","about","gallery","impact","share","dashboard"];
+function route(){
+  let r=(location.hash||"#home").slice(1);
+  if(!ROUTES.includes(r))r="home";
+  $$(".view").forEach(v=>v.classList.toggle("on",v.id==="v-"+r));
+  $$("nav.main a").forEach(a=>a.setAttribute("aria-current",a.dataset.r===r?"page":"false"));
+  window.scrollTo(0,0);
+  render();
+}
+window.addEventListener("hashchange",route);
+
+function bindTabs(){
+  $$("[data-tabs]").forEach(list=>{
+    list.addEventListener("click",e=>{
+      const b=e.target.closest("[role=tab]");if(!b)return;
+      list.querySelectorAll("[role=tab]").forEach(x=>x.setAttribute("aria-selected",x===b?"true":"false"));
+      const scope=list.parentElement;
+      list.querySelectorAll("[role=tab]").forEach(x=>{const p=document.getElementById(x.dataset.p);if(p)p.classList.toggle("on",x===b)});
+    });
+  });
+}
+function openTab(group,pane){const b=document.querySelector(`[data-tabs="${group}"] [data-p="${pane}"]`);if(b)b.click()}
+
+/* ---------- Static content ---------- */
+function renderStatic(){
+  $("#tracksGrid").innerHTML=TRACKS.map((t,i)=>`<div class="track"><div class="h"><span class="ic">${ic(t.ic)}</span><h3>${t.n}</h3></div><p>${t.d}</p><div class="chips">${t.ex.map(x=>`<span class="chip">${x}</span>`).join("")}</div></div>`).join("");
+  $("#sSection").innerHTML=SECTIONS.map(s=>`<label><input type="radio" name="sec" value="${s.id}"><span>${s.l}</span></label>`).join("");
+  $("#sTrack").innerHTML=TRACKS.map(t=>`<label><input type="radio" name="trk" value="${t.id}"><span>${ic(t.ic)}${t.n}</span></label>`).join("");
+  $("#sType").innerHTML=TYPES.map(t=>`<label><input type="radio" name="typ" value="${t.id}"><span>${ic(t.ic)}${t.n}</span></label>`).join("");
+  $("#fTrack").innerHTML=`<option value="">كل المسارات</option>`+TRACKS.map(t=>`<option value="${t.id}">${t.n}</option>`).join("");
+  $("#fType").innerHTML=`<option value="">كل الأنواع</option>`+TYPES.map(t=>`<option value="${t.id}">${t.n}</option>`).join("");
+  $("#aSec").innerHTML=`<option value="">كل الفصول</option>`+SECTIONS.map(s=>`<option value="${s.id}">${s.l}</option>`).join("");
+  $("#phaseIn").innerHTML=`<option value="">— لم تُحدَّد —</option>`+PHASES.map((p,i)=>`<option value="${i}">المرحلة ${num(i+1)}: ${p.n}</option>`).join("");
+  $("#enrollIn").innerHTML=SECTIONS.map(s=>`<div><label class="f" for="en-${s.id}">فصل ${s.l}</label><input class="in" type="number" min="0" max="60" id="en-${s.id}" inputmode="numeric"></div>`).join("");
+  $("#targetsIn").innerHTML=TARGETS.map(t=>`<div><label class="f" for="tg-${t.k}">${t.n}</label><input class="in" type="number" step="any" min="0" id="tg-${t.k}" placeholder="مقترح: ${num(t.sug)}${t.u==="%"?"٪":" من ٥"}"></div>`).join("");
+}
+function renderPhases(){
+  const cur=S.config.phase;
+  $("#phases").innerHTML=PHASES.map((p,i)=>`<div class="phase ${cur===i?"now":""}"><div class="n">${num(i+1)}</div><div><h3>${p.n}${cur===i?'<span class="tag em">المرحلة الحالية</span>':""}${p.honor?'<span class="tag">التكريم إجراء ختامي</span>':""}</h3><p>${p.d}</p><div class="row"><span><b>المخرجات:</b> ${p.o}</span><span><b>كيف يُقاس:</b> ${p.m}</span></div></div></div>`).join("");
+}
+
+/* ---------- Computation ---------- */
+function allEntries(){
+  const out=[];
+  for(const d of S.inbox){const es=(d.data&&d.data.entries)||{};for(const [id,e] of Object.entries(es)){if(e&&typeof e==="object")out.push({...e,_id:id,_doc:d.id})}}
+  return out.sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+}
+const norm=s=>String(s||"").replace(/[ً-ْ]/g,"").replace(/[أإآ]/g,"ا").replace(/ة/g,"ه").replace(/ى/g,"ي").replace(/\s+/g," ").trim();
+function studentKey(e){return e._doc==="msforms"?("f:"+norm(e.name)+"|"+e.section):("u:"+e._doc)}
+function qScore(e){const s=e.scores||{};const v=CRIT.map(c=>+s[c.k]).filter(x=>x>=1&&x<=4);return v.length===CRIT.length?v.reduce((a,b)=>a+b,0)/v.length:null}
+function computeStats(){
+  const E=allEntries();
+  const st={total:E.length,approved:0,pending:0,returned:0,students:0,perSec:{},perTrack:{},perType:{},family:0,quality:null,qualityN:0,crit:{},enrolled:0};
+  SECTIONS.forEach(s=>st.perSec[s.id]={subs:0,students:0,approved:0,enrolled:+(S.config.enroll||{})[s.id]||0});
+  TRACKS.forEach(t=>st.perTrack[t.id]=0);
+  const stuSet=new Set(),secStu={};
+  let qs=[],cs={};CRIT.forEach(c=>cs[c.k]=[]);
+  for(const e of E){
+    st[e.status||"pending"]=(st[e.status||"pending"]||0)+1;
+    const k=studentKey(e);stuSet.add(k);
+    if(st.perSec[e.section]){st.perSec[e.section].subs++;(secStu[e.section]=secStu[e.section]||new Set()).add(k);if(e.status==="approved")st.perSec[e.section].approved++}
+    if(st.perTrack[e.track]!=null)st.perTrack[e.track]++;
+    st.perType[e.ptype]=(st.perType[e.ptype]||0)+1;
+    if(e.family&&e.family.yes)st.family++;
+    const q=qScore(e);if(q!=null){qs.push(q);CRIT.forEach(c=>cs[c.k].push(+e.scores[c.k]))}
+  }
+  st.students=stuSet.size;
+  SECTIONS.forEach(s=>{st.perSec[s.id].students=(secStu[s.id]||new Set()).size;st.enrolled+=st.perSec[s.id].enrolled});
+  st.qualityN=qs.length;
+  if(qs.length){st.quality=qs.reduce((a,b)=>a+b,0)/qs.length/4*100;CRIT.forEach(c=>st.crit[c.k]=cs[c.k].reduce((a,b)=>a+b,0)/cs[c.k].length/4*100)}
+  st.participation=st.enrolled?st.students/st.enrolled*100:null;
+  st.familyPct=E.length?st.family/E.length*100:null;
+  // assessments
+  const A=S.assess||{};const secA=A.sections||{};st.outcomes={};
+  let wPre=0,wPost=0,wN=0,mSum=0,mN=0;
+  SECTIONS.forEach(s=>{const a=secA[s.id]||{};const ok=a.same===true&&+a.nPre>0&&+a.nPre===+a.nPost&&isFinite(+a.pre)&&isFinite(+a.post)&&a.pre!==""&&a.post!=="";
+    st.outcomes[s.id]={eq:ok,pre:ok?+a.pre:null,post:ok?+a.post:null,n:ok?+a.nPre:null,mastery:(a.mastery!==""&&a.mastery!=null&&isFinite(+a.mastery))?+a.mastery:null,has:!!(a.pre!==undefined&&a.pre!==""||a.post!==undefined&&a.post!=="")};
+    if(ok){wPre+=a.pre*a.nPre;wPost+=a.post*a.nPre;wN+=+a.nPre}
+    const o=st.outcomes[s.id];if(o.mastery!=null&&+a.nPost>0){mSum+=o.mastery*a.nPost;mN+=+a.nPost}});
+  st.prePost=wN?{pre:wPre/wN,post:wPost/wN,n:wN}:null;
+  st.mastery=mN?mSum/mN:null;
+  st.surveys=A.surveys||{};
+  st.satisfaction=(st.surveys.students&&st.surveys.students.overall!=null)?st.surveys.students.overall:null;
+  return st;
+}
+function publicStats(st){return {total:st.total,approved:st.approved,pending:st.pending,students:st.students,enrolled:st.enrolled,participation:st.participation,perSec:st.perSec,perTrack:st.perTrack,perType:st.perType,family:st.family,familyPct:st.familyPct,quality:st.quality,qualityN:st.qualityN,crit:st.crit,outcomes:st.outcomes,prePost:st.prePost,mastery:st.mastery,surveys:st.surveys,satisfaction:st.satisfaction}}
+function curStats(){return S.role==="teacher"?computeStats():(S.stats||null)}
+
+/* ---------- Charts ---------- */
+function bars(el,items,{max,fmt=(v)=>num(v),click}={}){
+  const m=max||Math.max(1,...items.map(i=>Math.max(i.v||0,i.t||0,i.v2||0)));
+  el.innerHTML=items.map((it,idx)=>{
+    const w=it.v==null?0:Math.min(100,it.v/m*100);
+    const tl=it.t!=null?`<span class="tline" style="inset-inline-start:${Math.min(100,it.t/m*100)}%" title="المستهدف: ${esc(fmt(it.t))}"></span>`:"";
+    const sec=it.v2!=null?`<div class="fill" style="width:${Math.min(100,it.v2/m*100)}%;background:var(--gold-2);height:6px;top:auto;bottom:-9px"></div>`:"";
+    const tag=click?"button":"div";
+    return `<${tag} class="bar" ${click?`data-i="${idx}" type="button"`:""} title="${esc(it.l)}: ${esc(it.v==null?"لا بيانات":fmt(it.v))}${it.t!=null?" — المستهدف "+esc(fmt(it.t)):""}"><span>${esc(it.l)}</span><span class="track-b" style="${it.v2!=null?"margin-bottom:9px":""}"><span class="fill" style="width:${w}%"></span>${sec}${tl}</span><span class="v">${it.v==null?'<span class="mini">لا بيانات</span>':esc(fmt(it.v))}</span></${tag}>`}).join("");
+  if(click)el.querySelectorAll("button.bar").forEach(b=>b.onclick=()=>click(items[+b.dataset.i]));
+}
+function kpi(lab,val,{unit="",target,tunit="",none="لا توجد بيانات بعد",sub}={}){
+  const v=val==null?`<span class="none">${none}</span>`:`${val}${unit?`<small> ${unit}</small>`:""}`;
+  const t=target!=null&&target!==""?`<div class="tgt"><i></i>المستهدف: ${target}${tunit}</div>`:`<div class="tgt" style="border-top-style:dotted"><span class="mini">لم يُحدَّد مستهدف</span></div>`;
+  return `<div class="kpi"><span class="lab">${lab}</span><span class="val">${v}</span>${sub?`<span class="mini">${sub}</span>`:""}${target===undefined?"":t}</div>`;
+}
+const T=k=>{const v=(S.config.targets||{})[k];return v===""||v==null?null:+v};
+
+/* ---------- Render: home & gallery ---------- */
+function render(){
+  const r=(location.hash||"#home").slice(1);
+  if(r==="home")renderHome();
+  if(r==="about")renderPhases();
+  if(r==="gallery")renderGallery();
+  if(r==="impact")renderImpact();
+  if(r==="share")renderShare();
+  if(r==="dashboard")renderDash();
+}
+function renderHome(){
+  const el=$("#galleryCount");
+  if(S.galLoaded&&S.gallery.length)el.innerHTML=`${num(S.gallery.length)} منتجًا معتمدًا ${ic("arrow","width:16px;height:16px")}`;
+}
+function renderGallery(){
+  // section tabs
+  const counts={};S.gallery.forEach(g=>counts[g.section]=(counts[g.section]||0)+1);
+  $("#secTabs").innerHTML=[{id:"",l:"كل الفصول"},...SECTIONS].map(s=>`<button type="button" data-s="${s.id}" aria-pressed="${S.gf.sec===s.id}">${s.id?"فصل "+s.l:s.l}${s.id?` <span class="mini">(${num(counts[s.id]||0)})</span>`:""}</button>`).join("");
+  $("#secTabs").querySelectorAll("button").forEach(b=>b.onclick=()=>{S.gf.sec=b.dataset.s;renderGallery()});
+  const lessons=[...new Set(S.gallery.map(g=>g.lesson).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"ar"));
+  const fl=$("#fLesson");const cur=S.gf.lesson;
+  fl.innerHTML=`<option value="">كل الدروس</option>`+lessons.map(l=>`<option>${esc(l)}</option>`).join("");fl.value=lessons.includes(cur)?cur:"";
+  $("#fTrack").value=S.gf.track;$("#fType").value=S.gf.type;
+  const list=S.gallery.filter(g=>(!S.gf.sec||g.section===S.gf.sec)&&(!S.gf.lesson||g.lesson===S.gf.lesson)&&(!S.gf.track||g.track===S.gf.track)&&(!S.gf.type||g.ptype===S.gf.type))
+    .sort((a,b)=>(b.approvedAt||0)-(a.approvedAt||0));
+  $("#galInfo").textContent=S.galLoaded?`${num(list.length)} من ${num(S.gallery.length)} منتجًا`:"";
+  const gal=$("#gal");
+  if(!S.connected&&S.role!=="loading"){gal.innerHTML=`<div class="empty" style="grid-column:1/-1">${ic("lock")}<h4>المعرض متاح بعد تسجيل الدخول</h4><p>يُعرض المعرض لمن شاركته المعلمة الصفحة وسجّل دخوله، حمايةً لمنتجات الطالبات.</p></div>`;return}
+  if(!S.galLoaded){gal.innerHTML=`<div class="empty" style="grid-column:1/-1"><h4>جارٍ تحميل المعرض…</h4></div>`;return}
+  if(!S.gallery.length){gal.innerHTML=`<div class="empty" style="grid-column:1/-1">${ic("grid")}<h4>لم يُعتمد أي منتج بعد</h4><p>ستظهر المنتجات هنا فور اعتمادها من المعلمة.</p></div>`;return}
+  if(!list.length){gal.innerHTML=`<div class="empty" style="grid-column:1/-1">${ic("search")}<h4>لا توجد منتجات تطابق التصفية</h4><button class="btn ghost sm" id="clrF" style="margin-top:8px">إزالة التصفية</button></div>`;$("#clrF").onclick=()=>{S.gf={sec:"",lesson:"",track:"",type:""};renderGallery()};return}
+  gal.innerHTML=list.map((g,i)=>{const t=typ(g.ptype)||TYPES[3];const tr=trk(g.track);const img=(g.files||[]).find(f=>/^image\//.test(f.ctype||""));
+    return `<button class="item" type="button" data-i="${i}"><div class="thumb">${img?`<img loading="lazy" alt="" src="${esc(blobUrl(img))}">`:ic(t.ic)}</div><div class="b"><h4>${esc(g.title)}</h4><span class="l">${esc(g.lesson)}</span><div class="tg"><span class="tag em">فصل ${secL(g.section)}</span>${tr?`<span class="chip">${esc(tr.n)}</span>`:""}${g.family?`<span class="tag">مشاركة أسرية</span>`:""}</div></div></button>`}).join("");
+  gal.querySelectorAll(".item").forEach(b=>b.onclick=()=>openItem(list[+b.dataset.i]));
+}
+function mediaHtml(files,link){
+  let h="";
+  for(const f of files||[]){const u=blobUrl(f);if(!u)continue;const ct=f.ctype||"";
+    if(ct.startsWith("image/"))h+=`<img src="${esc(u)}" alt="">`;
+    else if(ct.startsWith("video/"))h+=`<video src="${esc(u)}" controls preload="metadata"></video>`;
+    else h+=`<p style="margin-bottom:10px"><a class="btn ghost sm" href="${esc(u)}" target="_blank" rel="noopener">${ic("file")}فتح الملف: ${esc(f.name||"مرفق")}</a></p>`;}
+  const l=safeUrl(link);if(l)h+=`<p style="margin-bottom:10px"><a class="btn ghost sm" href="${esc(l)}" target="_blank" rel="noopener">${ic("link")}فتح الرابط</a> <span class="mini" dir="ltr">${esc(l.slice(0,60))}</span></p>`;
+  return h||`<p class="mini">لا يوجد مرفق.</p>`;
+}
+function openItem(g){
+  const tr=trk(g.track),t=typ(g.ptype);
+  $("#dlgT").textContent=g.title||"";
+  $("#dlgS").textContent=`فصل ${secL(g.section)} · ${g.lesson||""}`;
+  $("#dlgB").innerHTML=mediaHtml(g.files,g.link)+`<div class="kv"><div><span>المسار</span>${esc(tr?tr.n:"—")}</div><div><span>نوع المشاركة</span>${esc(t?t.n:"—")}</div><div><span>المساهمة الأسرية</span>${g.family?"نعم":"لا"}</div><div><span>تاريخ الاعتماد</span>${fmtDate(g.approvedAt)}</div></div>${g.desc?`<p style="color:var(--ink-2)">${esc(g.desc)}</p>`:""}`;
+  $("#dlg").showModal();
+}
+$("#dlgX").onclick=()=>$("#dlg").close();
+$("#dlg").addEventListener("click",e=>{if(e.target.id==="dlg")$("#dlg").close()});
+["fLesson","fTrack","fType"].forEach(id=>$("#"+id).addEventListener("change",e=>{S.gf[{fLesson:"lesson",fTrack:"track",fType:"type"}[id]]=e.target.value;renderGallery()}));
+
+/* ---------- Render: impact ---------- */
+function renderImpact(){
+  const st=curStats();
+  const sl=$("#impStatus");
+  if(!S.connected&&S.role!=="loading"){sl.innerHTML=`<span class="dot bad"></span><span>تعذّر الوصول إلى البيانات من هذا العرض؛ سجّلي الدخول إلى الصفحة المشتركة لعرض المؤشرات الفعلية.</span>`}
+  else if(S.role==="teacher")sl.innerHTML=`<span class="dot ok"></span><span>تُحسب المؤشرات مباشرة من قاعدة البيانات (عرض المعلمة).</span>`;
+  else if(S.stats)sl.innerHTML=`<span class="dot ok"></span><span>آخر تحديث للمؤشرات: ${esc(fmtDate(S.stats.updatedAt))}</span>`;
+  else sl.innerHTML=`<span class="dot warn"></span><span>${S.role==="loading"?"جارٍ التحميل…":"لم تُنشر مؤشرات بعد."}</span>`;
+  const s=st||{};
+  const z=v=>(st&&st.total>0)?v:null;
+  $("#kpis").innerHTML=[
+    kpi("الطالبات المشاركات دون تكرار",st&&st.total?num(s.students):null,{sub:st&&s.enrolled?`من ${num(s.enrolled)} طالبة — ${pct(s.participation)}`:(st&&st.total?"أدخلي أعداد الطالبات لحساب النسبة":""),target:T("participation")!=null?num(T("participation")):null,tunit:"٪"}),
+    kpi("متوسط جودة المنتجات",s.quality!=null?num(s.quality):null,{unit:"٪",sub:s.qualityN?`من ${num(s.qualityN)} منتجًا مقيَّمًا`:"",none:"لم تُقيَّم منتجات بعد",target:T("quality")!=null?num(T("quality")):null,tunit:"٪"}),
+    kpi("المشاركة الأسرية",z(s.familyPct)!=null?num(s.familyPct):null,{unit:"٪",sub:st&&st.total?`${num(s.family)} مشاركة من ${num(s.total)}`:"",target:T("family")!=null?num(T("family")):null,tunit:"٪"}),
+    kpi("نسبة الإتقان (بعدي)",s.mastery!=null?num(s.mastery):null,{unit:"٪",none:"لم يُسجَّل تقويم بعدي",target:T("mastery")!=null?num(T("mastery")):null,tunit:"٪"})
+  ].join("");
+  const goSec=it=>{S.gf={sec:it.id,lesson:"",track:"",type:""};location.hash="#gallery"};
+  const goTrk=it=>{S.gf={sec:"",lesson:"",track:it.id,type:""};location.hash="#gallery"};
+  if(st&&st.total){
+    const tp=T("participation");
+    const hasEn=SECTIONS.some(x=>s.perSec[x.id].enrolled);
+    bars($("#chSec"),SECTIONS.map(x=>{const p=s.perSec[x.id];return hasEn?{id:x.id,l:"فصل "+x.l,v:p.enrolled?p.students/p.enrolled*100:null,t:tp}:{id:x.id,l:"فصل "+x.l,v:p.subs}}),hasEn?{max:100,fmt:v=>pct(v),click:goSec}:{fmt:v=>num(v)+" مشاركة",click:goSec});
+    bars($("#chTrack"),TRACKS.map(t=>({id:t.id,l:t.n.split(" ").slice(0,2).join(" "),v:s.perTrack[t.id]||0})),{fmt:v=>num(v),click:goTrk});
+  } else {
+    $("#chSec").innerHTML=`<p class="mini">لا توجد مشاركات مسجّلة بعد.</p>`;$("#chTrack").innerHTML=`<p class="mini">لا توجد مشاركات مسجّلة بعد.</p>`;
+  }
+  if(s.quality!=null)bars($("#chQual"),[{l:"المتوسط العام",v:s.quality,t:T("quality")},...CRIT.map(c=>({l:c.n.split(" ").slice(0,2).join(" "),v:s.crit[c.k]}))],{max:100,fmt:v=>pct(v)});
+  else $("#chQual").innerHTML=`<p class="mini">لم تُقيَّم منتجات بعد. يظهر المؤشر بعد أول تقييم تجريه المعلمة.</p>`;
+  // pre/post
+  const pp=$("#chPrePost");
+  if(st&&s.outcomes){
+    const eqs=SECTIONS.filter(x=>s.outcomes[x.id]&&s.outcomes[x.id].eq);
+    const neq=SECTIONS.filter(x=>s.outcomes[x.id]&&!s.outcomes[x.id].eq&&s.outcomes[x.id].has);
+    if(eqs.length){
+      pp.innerHTML=`<div class="cols" style="margin-top:28px">${eqs.map(x=>{const o=s.outcomes[x.id];return `<div class="colg"><div class="pair"><div class="c pre" style="height:${o.pre}%"><span>${num(o.pre)}</span></div><div class="c post" style="height:${o.post}%"><span>${num(o.post)}</span></div></div></div>`}).join("")}</div><div class="colx">${eqs.map(x=>`<div>فصل ${x.l}</div>`).join("")}</div>`
+      +(s.prePost?`<p style="margin-top:12px;font-size:14.5px">المتوسط الموزون: من <b>${pct(s.prePost.pre,1)}</b> إلى <b>${pct(s.prePost.post,1)}</b> (فرق ${num(s.prePost.post-s.prePost.pre,1)} نقطة، ن = ${num(s.prePost.n)})</p>`:"")
+      +(neq.length?`<p class="mini" style="margin-top:6px">لم تُعرض: ${neq.map(x=>"فصل "+x.l).join("، ")} — بيانات غير متكافئة.</p>`:"");
+    } else pp.innerHTML=`<p class="mini" style="margin-top:10px">${neq.length?"البيانات المدخلة غير متكافئة بعد (عدد مختلف أو أداة غير مؤكّدة)، لذا لا تُعرض مقارنة.":"لم تُسجَّل نتائج التقويم القبلي والبعدي بعد."}</p>`;
+  } else pp.innerHTML=`<p class="mini">لا توجد بيانات.</p>`;
+  // surveys
+  const sv=$("#chSurvey");const SU=s.surveys||{};
+  const parts=[["students","استبانة الطالبات"],["families","استبانة الأسر"]].map(([k,n])=>{const x=SU[k];if(!x||!x.items||!x.items.length)return `<div style="margin-bottom:14px"><b style="font-size:14.5px">${n}</b><p class="mini">لم تُرفع نتائجها بعد.</p></div>`;
+    return `<div style="margin-bottom:16px"><div style="display:flex;justify-content:space-between;gap:8px"><b style="font-size:14.5px">${n}</b><span class="mini">ن = ${num(x.n)} · المتوسط العام ${num(x.overall,2)} من ٥</span></div><div class="bars sv-${k}" style="margin-top:8px"></div></div>`}).join("");
+  sv.innerHTML=parts;
+  [["students"],["families"]].forEach(([k])=>{const x=SU[k];const el=sv.querySelector(".sv-"+k);if(el&&x)bars(el,x.items.slice(0,8).map(it=>({l:it.q.length>28?it.q.slice(0,28)+"…":it.q,v:it.avg,t:k==="students"?T("satisfaction"):null})),{max:5,fmt:v=>num(v,2)})});
+  // report
+  const rb=$("#reportBox");
+  const ready=st&&st.total>0;
+  rb.innerHTML=`<ul class="clean goals" style="font-size:14.5px">
+    <li><span class="badge-n">${ready?ic("check","width:16px;height:16px"):"—"}</span><span>بيانات المشاركة والإنتاج ${ready?`متوافرة (${num(s.total)} مشاركة)`:"غير متوافرة بعد"}</span></li>
+    <li><span class="badge-n">${s.qualityN?ic("check","width:16px;height:16px"):"—"}</span><span>تقييم الجودة ${s.qualityN?`متوافر (${num(s.qualityN)} منتجًا)`:"لم يبدأ بعد"}</span></li>
+    <li><span class="badge-n">${s.prePost?ic("check","width:16px;height:16px"):"—"}</span><span>المقارنة القبلية والبعدية ${s.prePost?"متوافرة":"بانتظار بيانات متكافئة"}</span></li>
+    <li><span class="badge-n">${(SU.students||SU.families)?ic("check","width:16px;height:16px"):"—"}</span><span>نتائج الاستبانات ${(SU.students||SU.families)?"متوافرة":"لم تُرفع بعد"}</span></li></ul>
+    ${S.role==="teacher"?`<button class="btn pri sm" id="repBtn" style="margin-top:10px">${ic("down")}تنزيل التقرير الختامي</button>`:`<p class="mini" style="margin-top:8px">يُصدر التقرير الختامي من لوحة المعلمة، مبنيًا على البيانات المتوافرة فقط.</p>`}`;
+  const rbtn=$("#repBtn");if(rbtn)rbtn.onclick=()=>doExport("report");
+}
+
+/* ---------- Share ---------- */
+function renderShare(){
+  const gate=$("#shareGate"),lay=$("#shareLayout");
+  let msg="";
+  if(S.role==="loading")msg=`<div class="note" style="margin-bottom:16px">${ic("sync")}<span>جارٍ التحقق من صلاحيتك…</span></div>`;
+  else if(!S.connected)msg=`<div class="note red" style="margin-bottom:16px">${ic("lock")}<span>لا يمكن الإرسال من هذا العرض لأن قاعدة البيانات غير متاحة (لم يُسجَّل الدخول أو لم تُشارَك الصفحة معك). اطلبي من معلمتك رابط المشاركة أو نموذج Microsoft Forms البديل.</span></div>`;
+  else if(S.role==="teacher")msg=`<div class="note em" style="margin-bottom:16px">${ic("panel")}<span>هذه معاينة لما تراه الطالبة. الإرسال متاح لحسابات الطالبات (صلاحية مساهِمة)، والمراجعة من <a href="#dashboard">لوحة المعلمة</a>.</span></div>`;
+  else if(S.role==="viewer")msg=`<div class="note" style="margin-bottom:16px">${ic("lock")}<span>صلاحيتك الحالية للمشاهدة فقط. الإرسال يتطلب صلاحية «مساهِمة» تمنحها المعلمة.</span></div>`;
+  gate.innerHTML=msg;
+  const can=S.role==="student";
+  $("#sSubmit").disabled=!can;
+  // lessons datalist from gallery
+  $("#lessonList").innerHTML=[...new Set(S.gallery.map(g=>g.lesson).filter(Boolean))].map(l=>`<option value="${esc(l)}">`).join("");
+  renderMine();
+}
+function renderMine(){
+  const el=$("#mine");
+  if(S.role!=="student"){el.innerHTML=`<p class="mini">${S.role==="teacher"?"تظهر هنا للطالبة مشاركاتها وحالة كل منها.":"تظهر مشاركاتك هنا بعد تسجيل الدخول بصلاحية مساهِمة."}</p>`;return}
+  const es=Object.entries((S.myDoc&&S.myDoc.entries)||{}).map(([id,e])=>({...e,_id:id})).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+  if(!es.length){el.innerHTML=`<p class="mini">لم ترسلي مشاركات بعد.</p>`;return}
+  el.innerHTML=es.map(e=>{const s=ST[e.status||"pending"];const q=qScore(e);return `<div style="padding:10px 0;border-bottom:1px solid var(--line-2)"><div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start"><b style="font-size:14.5px">${esc(e.title)}</b><span class="tag ${s.c}">${s.n}</span></div><div class="mini">${esc(e.lesson)} · ${fmtDate(e.createdAt)}</div>${q!=null?`<div class="mini">تقييم الجودة: ${pct(q/4*100)}</div>`:""}${e.note?`<div class="note" style="margin-top:6px;padding:8px 10px;font-size:13.5px"><span>ملاحظة المعلمة: ${esc(e.note)}</span></div>`:""}${(e.status||"pending")==="pending"?`<button class="btn danger sm" style="margin-top:6px" data-wd="${esc(e._id)}">سحب المشاركة</button>`:""}</div>`}).join("");
+  el.querySelectorAll("[data-wd]").forEach(b=>b.onclick=()=>withdraw(b.dataset.wd,b));
+}
+async function withdraw(id,btn){
+  if(btn.dataset.c!=="1"){btn.dataset.c="1";btn.textContent="اضغطي مرة أخرى للتأكيد";setTimeout(()=>{btn.dataset.c="";btn.textContent="سحب المشاركة"},4000);return}
+  btn.disabled=true;
+  try{const es={...(S.myDoc.entries||{})};delete es[id];await S.db.doc("inbox/"+S.uid).set({...S.myDoc,entries:es});toast("سُحبت المشاركة")}catch(e){toast("تعذّر السحب، حاولي مجددًا");btn.disabled=false}
+}
+// file picking
+const drop=$("#drop"),fin=$("#sFiles");
+drop.onclick=()=>fin.click();
+drop.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();fin.click()}};
+drop.ondragover=e=>{e.preventDefault();drop.classList.add("over")};
+drop.ondragleave=()=>drop.classList.remove("over");
+drop.ondrop=e=>{e.preventDefault();drop.classList.remove("over");addFiles(e.dataTransfer.files)};
+fin.onchange=()=>{addFiles(fin.files);fin.value=""};
+function addFiles(list){
+  for(const f of list){
+    if(S.files.length>=3){toast("الحد الأقصى ٣ ملفات");break}
+    if(!/^(image|video)\//.test(f.type)&&f.type!=="application/pdf"){toast(`«${f.name}» نوع غير مدعوم. احفظي العروض بصيغة PDF أو أرفقي رابطًا`);continue}
+    if(f.size>20*1024*1024){toast(`«${f.name}» أكبر من ٢٠ ميجابايت؛ أرفقي رابطه بدلًا من ذلك`);continue}
+    S.files.push(f);
+  }
+  renderFiles();
+}
+function renderFiles(){
+  $("#fileList").innerHTML=S.files.map((f,i)=>`<div class="file-row">${ic(f.type.startsWith("image")?"image":f.type.startsWith("video")?"video":"file")}<span class="nm">${esc(f.name)}</span><span class="mini">${num(f.size/1048576,1)} م.ب</span><button type="button" data-rm="${i}" aria-label="حذف">${ic("x","width:18px;height:18px")}</button></div>`).join("");
+  $("#fileList").querySelectorAll("[data-rm]").forEach(b=>b.onclick=()=>{S.files.splice(+b.dataset.rm,1);renderFiles()});
+}
+$("#sFam").onchange=e=>{$("#sFamKind").style.display=e.target.checked?"block":"none"};
+$("#shareForm").addEventListener("submit",async ev=>{
+  ev.preventDefault();
+  if(S.role!=="student")return;
+  const v={name:$("#sName").value.trim(),section:(document.querySelector("input[name=sec]:checked")||{}).value,lesson:$("#sLesson").value.trim(),title:$("#sTitle").value.trim(),
+    track:(document.querySelector("input[name=trk]:checked")||{}).value,ptype:(document.querySelector("input[name=typ]:checked")||{}).value,link:$("#sLink").value.trim(),gained:$("#sGained").value.trim()};
+  const bad={name:!v.name,section:!v.section,lesson:!v.lesson,title:!v.title,track:!v.track,ptype:!v.ptype,gained:!v.gained,attach:(!S.files.length&&!safeUrl(v.link))||(v.link&&!safeUrl(v.link))};
+  $$("#shareForm .field[data-f]").forEach(f=>f.classList.toggle("bad",!!bad[f.dataset.f]));
+  const first=document.querySelector("#shareForm .field.bad");if(first){first.scrollIntoView({behavior:"smooth",block:"center"});return}
+  const btn=$("#sSubmit"),pg=$("#sProgress");btn.disabled=true;
+  try{
+    const files=[];
+    if(S.files.length){
+      if(!S.assets)throw {m:"رفع الملفات غير متاح لحسابك حاليًا. أرفقي رابطًا بدلًا من ذلك."};
+      for(let i=0;i<S.files.length;i++){pg.textContent=`جارٍ رفع الملف ${num(i+1)} من ${num(S.files.length)}…`;const f=S.files[i];const r=await S.assets.upload(f);files.push({id:r.id,name:f.name.slice(0,120),ctype:r.contentType||f.type,size:r.sizeBytes||f.size})}
+    }
+    pg.textContent="جارٍ الحفظ…";
+    const id=rid();
+    const entry={name:v.name,section:v.section,lesson:v.lesson,title:v.title,track:v.track,ptype:v.ptype,files,link:safeUrl(v.link),desc:$("#sDesc").value.trim(),
+      family:{yes:$("#sFam").checked,kind:$("#sFam").checked?$("#sFamKind").value.trim():""},gained:v.gained,consent:$("#sConsent").checked,createdAt:Date.now(),status:"pending",source:"platform"};
+    const ref=S.db.doc("inbox/"+S.uid);
+    if(S.myDoc)await ref.update({entries:{[id]:entry}});else await ref.set({entries:{[id]:entry},createdAt:Date.now()});
+    S.files=[];renderFiles();
+    ["sLesson","sTitle","sLink","sDesc","sGained","sFamKind"].forEach(i=>$("#"+i).value="");
+    $$("input[name=trk],input[name=typ]").forEach(i=>i.checked=false);$("#sFam").checked=false;$("#sFamKind").style.display="none";
+    pg.textContent="";toast("أُرسلت مشاركتك بنجاح، وهي الآن بانتظار المراجعة");
+  }catch(e){pg.textContent="";toast(e&&e.m?e.m:(e&&e.code==="quota_exceeded"?"امتلأت سعة التخزين؛ أبلغي معلمتك":"تعذّر الإرسال، تحققي من الاتصال وحاولي مجددًا"))}
+  btn.disabled=false;
+});
+
+/* ---------- Dashboard ---------- */
+function renderDash(){
+  const gate=$("#dashGate"),lay=$("#dashLayout");
+  if(S.role!=="teacher"){lay.hidden=true;gate.innerHTML=`<div class="empty">${ic("lock")}<h4>هذه اللوحة خاصة بالمعلمة</h4><p>${S.role==="loading"?"جارٍ التحقق من الصلاحية…":"تظهر لمالكة الصفحة ومحرّريها فقط."}</p></div>`;return}
+  gate.innerHTML="";lay.hidden=false;
+  if(!S.inboxLoaded){$("#dKpis").innerHTML=`<p class="mini">جارٍ تحميل المشاركات…</p>`;return}
+  const st=computeStats();
+  $("#qCnt").textContent=num(st.pending);
+  $("#dKpis").innerHTML=[
+    kpi("إجمالي المشاركات",num(st.total),{sub:`${num(st.approved)} معتمدة · ${num(st.returned||0)} أُعيدت`}),
+    kpi("طالبات مشاركات دون تكرار",num(st.students),{sub:st.enrolled?`${pct(st.participation)} من ${num(st.enrolled)} طالبة`:"أدخلي أعداد الطالبات من الإعداد"}),
+    kpi("بانتظار الاعتماد",num(st.pending),{sub:st.pending?`<a href="#dashboard" id="goQ">راجعيها الآن</a>`:"لا شيء معلّق"}),
+    kpi("مشاركات أسرية",num(st.family),{sub:st.total?pct(st.familyPct)+" من المشاركات":""})
+  ].join("");
+  const gq=$("#goQ");if(gq)gq.onclick=e=>{e.preventDefault();openTab("dash","d-queue")};
+  bars($("#dSec"),SECTIONS.map(x=>({l:"فصل "+x.l,v:st.perSec[x.id].subs,v2:st.perSec[x.id].students})),{fmt:v=>num(v)});
+  bars($("#dTrack"),TRACKS.map(t=>({l:t.n.split(" ").slice(0,2).join(" "),v:st.perTrack[t.id]||0})),{fmt:v=>num(v)});
+  $("#pubInfo").textContent=S.stats?`آخر نشر: ${fmtDate(S.stats.updatedAt)}`:"لم تُنشر مؤشرات للعرض العام بعد";
+  renderQueue();renderAll();renderAssessForm();renderCfgForm();
+}
+function entryCard(e,full){
+  const tr=trk(e.track),t=typ(e.ptype),s=ST[e.status||"pending"],sc=e.scores||{};
+  return `<div class="qitem" data-doc="${esc(e._doc)}" data-id="${esc(e._id)}">
+   <div class="hd"><div><h4>${esc(e.title)}</h4><div class="sub">${esc(e.name)} · فصل ${secL(e.section)} · ${esc(e.lesson)} · ${fmtDate(e.createdAt)}${e.source==="forms"?' · <span class="tag">من Forms</span>':""}</div></div><span class="tag ${s.c}">${s.n}</span></div>
+   <div class="kv"><div><span>المسار</span>${esc(tr?tr.n:"غير محدد")}</div><div><span>النوع</span>${esc(t?t.n:"—")}</div><div><span>المساهمة الأسرية</span>${e.family&&e.family.yes?("نعم"+(e.family.kind?" — "+esc(e.family.kind):"")):"لا"}</div><div><span>العرض في المعرض</span>${e.consent===false?"لم توافق الطالبة":"موافقة"}</div></div>
+   ${e.desc?`<p style="font-size:14.5px;color:var(--ink-2);margin-bottom:6px">${esc(e.desc)}</p>`:""}
+   <p style="font-size:14.5px;margin-bottom:8px"><b>ما اكتسبته:</b> ${esc(e.gained||"—")}</p>
+   <div class="acts" style="margin-bottom:6px"><button class="btn ghost sm" data-act="view">${ic("image")}عرض المنتج</button></div>
+   <div class="rubric">${CRIT.map(c=>`<label>${c.n}<select class="in" data-c="${c.k}">${LEVELS.map((l,i)=>`<option value="${i||""}" ${+sc[c.k]===i&&i?"selected":""}>${l||"— اختاري —"}</option>`).join("")}</select></label>`).join("")}</div>
+   <input class="in" data-note placeholder="ملاحظة للطالبة (اختياري)" value="${esc(e.note||"")}" style="margin-bottom:10px">
+   <div class="acts"><button class="btn pri sm" data-act="approve">${ic("check")}${e.status==="approved"?"تحديث الاعتماد":"اعتماد ونشر"}</button><button class="btn ghost sm" data-act="return">إعادة للتحسين</button><button class="btn ghost sm" data-act="score">حفظ التقييم فقط</button><span class="mini" data-msg></span></div>
+  </div>`;
+}
+function bindCards(root,list){
+  root.querySelectorAll(".qitem").forEach(card=>{
+    const e=list.find(x=>x._id===card.dataset.id&&x._doc===card.dataset.doc);if(!e)return;
+    card.querySelectorAll("[data-act]").forEach(b=>b.onclick=()=>reviewAct(b.dataset.act,e,card,b));
+  });
+}
+function renderQueue(){
+  const E=allEntries().filter(e=>(e.status||"pending")==="pending");
+  const q=$("#queue");
+  if(!E.length){q.innerHTML=`<div class="empty">${ic("check")}<h4>لا توجد مشاركات بانتظار الاعتماد</h4><p>ستظهر هنا فور إرسالها من الطالبات أو استيرادها من Forms.</p></div>`;return}
+  q.innerHTML=E.map(e=>entryCard(e)).join("");bindCards(q,E);
+}
+function renderAll(){
+  const sec=$("#aSec").value,stt=$("#aStatus").value,qq=norm($("#aQ").value);
+  const E=allEntries().filter(e=>(!sec||e.section===sec)&&(!stt||(e.status||"pending")===stt)&&(!qq||norm(e.name+" "+e.lesson+" "+e.title).includes(qq)));
+  const tb=$("#allTbl");
+  if(!E.length){tb.innerHTML=`<tr><td class="mini" style="padding:24px;text-align:center">لا توجد مشاركات مطابقة.</td></tr>`;return}
+  tb.innerHTML=`<thead><tr><th>الطالبة</th><th>الفصل</th><th>الدرس / المنتج</th><th>المسار</th><th>الجودة</th><th>الحالة</th><th></th></tr></thead><tbody>${E.map((e,i)=>{const q=qScore(e);const s=ST[e.status||"pending"];return `<tr><td>${esc(e.name)}</td><td>${secL(e.section)}</td><td>${esc(e.lesson)}<div class="mini">${esc(e.title)}</div></td><td class="mini">${esc((trk(e.track)||{n:"—"}).n)}</td><td>${q!=null?pct(q/4*100):"—"}</td><td><span class="tag ${s.c}">${s.n}</span></td><td><button class="btn ghost sm" data-i="${i}">مراجعة</button></td></tr>`}).join("")}</tbody>`;
+  tb.querySelectorAll("[data-i]").forEach(b=>b.onclick=()=>{const e=E[+b.dataset.i];$("#dlgT").textContent="مراجعة مشاركة";$("#dlgS").textContent="";$("#dlgB").innerHTML=entryCard(e);bindCards($("#dlgB"),[e]);$("#dlg").showModal()});
+}
+["aSec","aStatus"].forEach(i=>$("#"+i).onchange=renderAll);$("#aQ").oninput=renderAll;
+
+async function reviewAct(act,e,card,btn){
+  if(act==="view"){$("#dlgT").textContent=e.title;$("#dlgS").textContent=`${e.name} · فصل ${secL(e.section)}`;$("#dlgB").innerHTML=mediaHtml(e.files,e.link);$("#dlg").showModal();return}
+  const scores={};card.querySelectorAll("[data-c]").forEach(s=>{if(s.value)scores[s.dataset.c]=+s.value});
+  const note=card.querySelector("[data-note]").value.trim();
+  const msg=card.querySelector("[data-msg]");
+  const status=act==="approve"?"approved":act==="return"?"returned":(e.status||"pending");
+  if(act==="approve"&&Object.keys(scores).length<CRIT.length){if(btn.dataset.c!=="1"){btn.dataset.c="1";msg.textContent="لم تكتمل معايير التقييم؛ اضغطي «اعتماد» مرة أخرى للاعتماد دون تقييم كامل.";return}}
+  card.querySelectorAll("button").forEach(b=>b.disabled=true);msg.textContent="جارٍ الحفظ…";
+  try{
+    await S.db.doc("inbox/"+e._doc).update({entries:{[e._id]:{status,scores,note,reviewedAt:Date.now()}}});
+    const gref=S.db.doc("gallery/"+e._id);
+    if(status==="approved"&&e.consent!==false){
+      await gref.set({section:e.section,lesson:e.lesson,title:e.title,track:e.track,ptype:e.ptype,files:e.files||[],link:safeUrl(e.link),desc:e.desc||"",family:!!(e.family&&e.family.yes),approvedAt:Date.now()});
+    } else if(status!=="approved"||e.consent===false){ if(S.gallery.some(g=>g._id===e._id))await gref.delete(); }
+    toast(status==="approved"?(e.consent===false?"اعتُمدت (لا تُعرض في المعرض لعدم موافقة الطالبة)":"اعتُمدت ونُشرت في المعرض"):status==="returned"?"أُعيدت للطالبة مع الملاحظة":"حُفظ التقييم");
+    if($("#dlg").open&&$("#dlgB").contains(card))$("#dlg").close();
+    await publishStats(true);
+  }catch(err){msg.textContent="تعذّر الحفظ، حاولي مجددًا";card.querySelectorAll("button").forEach(b=>b.disabled=false)}
+}
+async function publishStats(quiet){
+  if(S.role!=="teacher"||!S.db)return;
+  const p=publicStats(computeStats());const js=JSON.stringify(p);
+  if(js===S.lastPub){if(!quiet)toast("المؤشرات المنشورة محدّثة بالفعل");return}
+  try{await S.db.doc("stats/summary").set({...JSON.parse(js),updatedAt:Date.now()});S.lastPub=js;if(!quiet)toast("نُشرت المؤشرات المحدّثة")}catch(e){if(!quiet)toast("تعذّر نشر المؤشرات")}
+}
+$("#pubBtn").onclick=()=>publishStats(false);
+
+/* assessments */
+function renderAssessForm(){
+  if(document.activeElement&&$("#assessTbl").contains(document.activeElement))return;
+  const A=(S.assess.sections)||{};
+  $("#assessTbl").innerHTML=`<thead><tr><th>الفصل</th><th>عدد (قبلي)</th><th>متوسط قبلي ٪</th><th>عدد (بعدي)</th><th>متوسط بعدي ٪</th><th>نسبة الإتقان البعدي ٪</th><th>الأداة متكافئة</th><th>الحالة</th></tr></thead><tbody>${SECTIONS.map(s=>{const a=A[s.id]||{};const eq=a.same===true&&+a.nPre>0&&+a.nPre===+a.nPost&&a.pre!==""&&a.post!==""&&a.pre!=null&&a.post!=null;
+    return `<tr data-s="${s.id}"><td>${s.l}</td><td><input type="number" min="0" data-k="nPre" value="${esc(a.nPre??"")}"></td><td><input type="number" min="0" max="100" step="any" data-k="pre" value="${esc(a.pre??"")}"></td><td><input type="number" min="0" data-k="nPost" value="${esc(a.nPost??"")}"></td><td><input type="number" min="0" max="100" step="any" data-k="post" value="${esc(a.post??"")}"></td><td><input type="number" min="0" max="100" step="any" data-k="mastery" value="${esc(a.mastery??"")}"></td><td><input type="checkbox" data-k="same" ${a.same?"checked":""} style="width:auto"></td><td>${eq?'<span class="tag em">متكافئة</span>':'<span class="tag">غير مكتملة</span>'}</td></tr>`}).join("")}</tbody>`;
+}
+$("#saveAssess").onclick=async()=>{
+  const sections={};let err="";
+  $$("#assessTbl tr[data-s]").forEach(tr=>{const o={};tr.querySelectorAll("[data-k]").forEach(i=>{if(i.type==="checkbox")o[i.dataset.k]=i.checked;else o[i.dataset.k]=i.value===""?"":+i.value});
+    ["pre","post","mastery"].forEach(k=>{if(o[k]!==""&&(o[k]<0||o[k]>100))err="النسب يجب أن تكون بين ٠ و١٠٠"});sections[tr.dataset.s]=o});
+  if(err){$("#assessMsg").textContent=err;return}
+  $("#assessMsg").textContent="جارٍ الحفظ…";
+  try{await S.db.doc("assess/main").set({...(S.assess||{}),sections,updatedAt:Date.now()});$("#assessMsg").textContent="حُفظت بيانات التقويم";await publishStats(true)}catch(e){$("#assessMsg").textContent="تعذّر الحفظ"}
+};
+
+/* spreadsheet reading */
+let XLSXp=null;
+function loadXLSX(){if(window.XLSX)return Promise.resolve(window.XLSX);if(XLSXp)return XLSXp;XLSXp=new Promise((res,rej)=>{const s=document.createElement("script");s.src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js";s.onload=()=>res(window.XLSX);s.onerror=()=>{XLSXp=null;rej()};document.head.appendChild(s)});return XLSXp}
+async function readSheet(file){
+  const X=await loadXLSX();const buf=await file.arrayBuffer();
+  const wb=/\.csv$/i.test(file.name)?X.read(new TextDecoder("utf-8").decode(buf),{type:"string"}):X.read(buf,{type:"array"});
+  const ws=wb.Sheets[wb.SheetNames[0]];return X.utils.sheet_to_json(ws,{header:1,defval:"",raw:false});
+}
+const LIKERT={"موافق بشده":5,"موافق تماما":5,"موافق":4,"محايد":3,"غير متاكد":3,"غير موافق":2,"غير موافق بشده":1,"معارض":2,"معارض بشده":1,"دائما":5,"غالبا":4,"احيانا":3,"نادرا":2,"ابدا":1,"ممتاز":5,"جيد جدا":4,"جيد":3,"مقبول":2,"ضعيف":1};
+function likert(v){const t=norm(toLatin(v));if(t==="")return null;if(/^[1-5](\.\d+)?$/.test(t))return +t;return LIKERT[t]??null}
+$("#survBtn").onclick=()=>$("#survFile").click();
+$("#survFile").onchange=async e=>{
+  const f=e.target.files[0];e.target.value="";if(!f)return;const m=$("#survMsg");m.textContent="جارٍ القراءة…";
+  try{
+    const rows=await readSheet(f);if(rows.length<2)throw 0;
+    const head=rows[0],body=rows.slice(1).filter(r=>r.some(c=>String(c).trim()!==""));
+    const items=[];
+    head.forEach((h,ci)=>{const vals=body.map(r=>r[ci]).filter(v=>String(v).trim()!=="");if(!vals.length)return;const mapped=vals.map(likert).filter(v=>v!=null);
+      if(mapped.length/vals.length>=0.8&&!/^(id|المعرف|رقم)$/i.test(String(h).trim()))items.push({q:String(h).trim().slice(0,160),avg:mapped.reduce((a,b)=>a+b,0)/mapped.length,n:mapped.length})});
+    if(!items.length){m.textContent="لم أجد أعمدة بإجابات متدرجة (١–٥ أو موافق…غير موافق) في الملف.";return}
+    const aud=$("#survAud").value;const overall=items.reduce((a,b)=>a+b.avg,0)/items.length;
+    $("#survPreview").innerHTML=`<p style="font-size:14.5px;margin-bottom:8px">${num(body.length)} مستجيبًا · ${num(items.length)} عبارة · المتوسط العام ${num(overall,2)} من ٥</p><div class="bars" id="svPrev"></div><button class="btn pri sm" id="svSave" style="margin-top:12px">حفظ النتائج</button>`;
+    bars($("#svPrev"),items.map(i=>({l:i.q.slice(0,30),v:i.avg})),{max:5,fmt:v=>num(v,2)});
+    m.textContent="";
+    $("#svSave").onclick=async()=>{try{const surveys={...((S.assess||{}).surveys||{}),[aud]:{n:body.length,overall,items:items.map(i=>({q:i.q,avg:Math.round(i.avg*100)/100})),file:f.name.slice(0,80),at:Date.now()}};
+      await S.db.doc("assess/main").set({...(S.assess||{}),surveys,updatedAt:Date.now()});$("#survPreview").innerHTML="";toast("حُفظت نتائج الاستبانة");await publishStats(true)}catch(_){toast("تعذّر الحفظ")}};
+  }catch(err){m.textContent="تعذّرت قراءة الملف. تأكدي أنه ملف Excel أو CSV من Forms."}
+};
+
+/* Forms import */
+const IMPF=[["name","الاسم",/اسم/],["section","الفصل",/فصل|شعب/],["lesson","عنوان الدرس",/درس/],["title","عنوان المنتج",/منتج|عنوان/],["track","المسار",/مسار/],["ptype","نوع المشاركة",/نوع/],["link","الملف أو الرابط",/رابط|ملف|رفع|ارفاق|إرفاق/],["famYes","هل شاركت الأسرة",/هل.*اسر|اسر.*هل/],["famKind","كيف شاركت الأسرة",/كيف.*اسر/],["gained","ماذا اكتسبت",/اكتسب/]];
+function guessSection(v){const t=toLatin(v);const m=t.match(/3\s*[\/\-\\]\s*([2567])/)||t.match(/\b([2567])\b/);return m?("3-"+m[1]):""}
+function guessTrack(v){const t=norm(v);if(/هندس|تصميم/.test(t))return "t1";if(/اقران|قياد/.test(t))return "t2";if(/بحث|استقصا/.test(t))return "t3";if(/ابتكار|رقمي/.test(t))return "t4";if(/اسر|شراك/.test(t))return "t5";if(/حيا/.test(t))return "t6";return ""}
+function guessType(v){const t=norm(v);if(/عرض|بوربوينت|شرائح/.test(t))return "slides";if(/صور|انفو/.test(t))return "image";if(/فيديو|مقطع/.test(t))return "video";if(/رابط/.test(t))return "link";if(/مجسم|نموذج/.test(t))return "model";return "doc"}
+function hashStr(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return (h>>>0).toString(36)}
+$("#impBtn").onclick=()=>$("#impFile").click();
+$("#impFile").onchange=async e=>{
+  const f=e.target.files[0];e.target.value="";if(!f)return;const m=$("#impMsg");m.textContent="جارٍ القراءة…";
+  try{
+    const rows=await readSheet(f);const head=rows[0].map(h=>String(h).trim());const body=rows.slice(1).filter(r=>r.some(c=>String(c).trim()!==""));
+    if(!body.length){m.textContent="الملف لا يحتوي ردودًا.";return}
+    m.textContent=`${num(body.length)} ردًا. راجعي مطابقة الأعمدة ثم استوردي.`;
+    const used=new Set();
+    const guess=IMPF.map(([k,l,re])=>{let idx=head.findIndex((h,i)=>!used.has(i)&&re.test(norm(h)));if(k==="title"){idx=head.findIndex((h,i)=>!used.has(i)&&/منتج/.test(norm(h)));}if(idx>=0)used.add(idx);return idx});
+    $("#impMap").innerHTML=`<div class="map-grid">${IMPF.map(([k,l],i)=>`<label class="f" style="font-weight:500">${l}<select class="in" data-k="${k}" style="margin-top:4px"><option value="-1">— لا يوجد —</option>${head.map((h,hi)=>`<option value="${hi}" ${guess[i]===hi?"selected":""}>${esc(h.slice(0,70))}</option>`).join("")}</select></label>`).join("")}</div><button class="btn pri sm" id="impGo" style="margin-top:14px">استيراد ${num(body.length)} مشاركة إلى قائمة المراجعة</button>`;
+    $("#impGo").onclick=async()=>{
+      const map={};$$("#impMap [data-k]").forEach(s=>map[s.dataset.k]=+s.value);
+      const g=(r,k)=>map[k]>=0?String(r[map[k]]??"").trim():"";
+      const existing=((S.inbox.find(d=>d.id==="msforms")||{}).data||{}).entries||{};
+      const add={};let skip=0,bad=0;
+      for(const r of body){
+        const name=g(r,"name"),section=guessSection(g(r,"section"));
+        if(!name||!section){bad++;continue}
+        const id="f"+hashStr(r.join("|"));if(existing[id]){skip++;continue}
+        const famYes=/نعم|yes|^1$/i.test(g(r,"famYes"))||(!!g(r,"famKind")&&map.famYes<0);
+        const linkRaw=g(r,"link");const link=(linkRaw.match(/https:\/\/\S+/)||[""])[0];
+        add[id]={name:name.slice(0,80),section,lesson:g(r,"lesson").slice(0,120)||"غير محدد",title:(g(r,"title")||g(r,"lesson")||"منتج معرفي").slice(0,120),track:guessTrack(g(r,"track")),ptype:guessType(g(r,"ptype")),files:[],link,desc:"",
+          family:{yes:famYes,kind:g(r,"famKind").slice(0,200)},gained:g(r,"gained").slice(0,500),consent:true,createdAt:Date.now(),status:"pending",source:"forms"};
+      }
+      const n=Object.keys(add).length;
+      if(!n){m.textContent=`لا جديد للاستيراد (${num(skip)} مكرر، ${num(bad)} ناقص الاسم أو الفصل).`;return}
+      try{const ref=S.db.doc("inbox/msforms");if(S.inbox.some(d=>d.id==="msforms"))await ref.update({entries:add});else await ref.set({entries:add,createdAt:Date.now()});
+        $("#impMap").innerHTML="";m.textContent=`استُوردت ${num(n)} مشاركة${skip?`، وتُجوهل ${num(skip)} مكرر`:""}${bad?`، و${num(bad)} ناقصة الاسم أو الفصل`:""}.`;toast("استُوردت المشاركات إلى قائمة المراجعة")}
+      catch(err){m.textContent=err&&err.code==="invalid_argument"?"الملف كبير جدًا لدفعة واحدة؛ قسّميه إلى ملفين.":"تعذّر الاستيراد"}
+    };
+  }catch(err){m.textContent="تعذّرت قراءة الملف. تأكدي أنه ملف Excel أو CSV."}
+};
+
+/* settings */
+function renderCfgForm(){
+  if(document.activeElement&&$("#d-settings").contains(document.activeElement))return;
+  const c=S.config||{};
+  SECTIONS.forEach(s=>$("#en-"+s.id).value=(c.enroll||{})[s.id]??"");
+  TARGETS.forEach(t=>$("#tg-"+t.k).value=(c.targets||{})[t.k]??"");
+  $("#phaseIn").value=c.phase!=null?String(c.phase):"";
+}
+$("#saveCfg").onclick=async()=>{
+  const enroll={},targets={};
+  SECTIONS.forEach(s=>{const v=$("#en-"+s.id).value;if(v!=="")enroll[s.id]=+v});
+  TARGETS.forEach(t=>{const v=$("#tg-"+t.k).value;if(v!=="")targets[t.k]=+v});
+  const ph=$("#phaseIn").value;
+  $("#cfgMsg").textContent="جارٍ الحفظ…";
+  try{await S.db.doc("config/main").set({enroll,targets,phase:ph===""?null:+ph,updatedAt:Date.now()});$("#cfgMsg").textContent="حُفظت الإعدادات";await publishStats(true)}catch(e){$("#cfgMsg").textContent="تعذّر الحفظ"}
+};
+
+/* exports */
+function csv(rows){return "﻿"+rows.map(r=>r.map(c=>{const s=String(c??"");return /[",\n\r]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s}).join(",")).join("\r\n")}
+async function save(filename,text,mime){
+  const m=$("#expMsg");
+  if(!S.downloads){m.textContent="التنزيل غير متاح في هذا العرض. افتحي الصفحة من رابطها المباشر على claude.ai.";toast("التنزيل غير متاح هنا");return}
+  try{await S.downloads.save({filename,data:new Blob([text],{type:mime})});m.textContent="تم تجهيز الملف: "+filename}
+  catch(e){try{await S.downloads.save({filename,data:text});m.textContent="تم تجهيز الملف: "+filename}catch(_){m.textContent="لم يكتمل التنزيل (أُلغي أو رُفض)."}}
+}
+function doExport(kind){
+  const st=computeStats();const d=new Date().toISOString().slice(0,10);
+  if(kind==="all"){
+    const rows=[["الاسم","الفصل","الدرس","المنتج","المسار","النوع","مشاركة أسرية","كيف شاركت الأسرة","ما اكتسبته","الحالة",...CRIT.map(c=>c.n),"الجودة٪","ملاحظة","المصدر","تاريخ الإرسال","روابط"]];
+    allEntries().forEach(e=>{const q=qScore(e);rows.push([e.name,secL(e.section),e.lesson,e.title,(trk(e.track)||{n:""}).n,(typ(e.ptype)||{n:""}).n,e.family&&e.family.yes?"نعم":"لا",(e.family||{}).kind||"",e.gained||"",ST[e.status||"pending"].n,...CRIT.map(c=>(e.scores||{})[c.k]||""),q!=null?Math.round(q/4*100):"",e.note||"",e.source==="forms"?"Microsoft Forms":"المنصة",e.createdAt?new Date(e.createdAt).toLocaleDateString("ar-SA-u-ca-islamic-umalqura"):"",[e.link,...(e.files||[]).map(f=>f.name)].filter(Boolean).join(" | ")])});
+    return save(`مشاركات-إثراء-وأثر-${d}.csv`,csv(rows),"text/csv;charset=utf-8");
+  }
+  if(kind==="kpi"){
+    const r=v=>v==null?"لا توجد بيانات":Math.round(v*10)/10;const tg=k=>T(k)==null?"لم يُحدَّد":T(k);
+    const rows=[["المؤشر","النتيجة الفعلية","المستهدف"],["إجمالي المشاركات",st.total,""],["المعتمدة",st.approved,""],["الطالبات المشاركات دون تكرار",st.students,""],["نسبة المشاركة٪",r(st.participation),tg("participation")],["متوسط الجودة٪",r(st.quality),tg("quality")],["المشاركة الأسرية٪",r(st.familyPct),tg("family")],["نسبة الإتقان البعدي٪",r(st.mastery),tg("mastery")],["متوسط القبلي٪ (متكافئ)",st.prePost?r(st.prePost.pre):"لا توجد بيانات متكافئة",""],["متوسط البعدي٪ (متكافئ)",st.prePost?r(st.prePost.post):"لا توجد بيانات متكافئة",""],["رضا الطالبات (من ٥)",st.satisfaction!=null?Math.round(st.satisfaction*100)/100:"لا توجد بيانات",tg("satisfaction")],[],["الفصل","المشاركات","الطالبات","المعتمدة","عدد الطالبات"]];
+    SECTIONS.forEach(s=>{const p=st.perSec[s.id];rows.push([s.l,p.subs,p.students,p.approved,p.enrolled||""])});
+    rows.push([],["المسار","عدد المنتجات"]);TRACKS.forEach(t=>rows.push([t.n,st.perTrack[t.id]||0]));
+    return save(`مؤشرات-إثراء-وأثر-${d}.csv`,csv(rows),"text/csv;charset=utf-8");
+  }
+  if(kind==="report")return save(`التقرير-الختامي-إثراء-وأثر-${d}.html`,reportHtml(st),"text/html;charset=utf-8");
+}
+function reportHtml(st){
+  const r=(v,u="٪")=>v==null?"<i>لا توجد بيانات</i>":num(v,1)+u;const tg=k=>T(k)==null?"لم يُحدَّد":num(T(k))+(k==="satisfaction"?" من ٥":"٪");
+  const row=(a,b,c)=>`<tr><td>${a}</td><td>${b}</td><td>${c??""}</td></tr>`;
+  const sv=k=>{const x=(st.surveys||{})[k];return x?`<p>ن = ${num(x.n)} — المتوسط العام ${num(x.overall,2)} من ٥</p><table><tr><th>العبارة</th><th>المتوسط</th></tr>${x.items.map(i=>`<tr><td>${esc(i.q)}</td><td>${num(i.avg,2)}</td></tr>`).join("")}</table>`:"<p><i>لم تُرفع نتائج.</i></p>"};
+  return `<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><title>التقرير الختامي — إثراء وأثر</title><style>body{font-family:"IBM Plex Sans Arabic",Tahoma,sans-serif;max-width:820px;margin:32px auto;padding:0 20px;color:#1C2826;line-height:1.8}h1{color:#0B3F35;margin-bottom:0}h2{color:#0F5446;border-bottom:2px solid #C9AE7C;padding-bottom:4px;margin-top:28px;font-size:19px}table{width:100%;border-collapse:collapse;margin:8px 0}td,th{border:1px solid #E4DDD0;padding:7px 10px;text-align:right}th{background:#F1EADD}.m{color:#6E7B78;font-size:14px}@media print{body{margin:0}}</style></head><body>
+  <h1>التقرير الختامي لبرنامج «إثراء وأثر»</h1><p class="m">من التعلم إلى إنتاج المعرفة · الدراسات الإسلامية · الصف الثالث المتوسط · المتوسطة الثالثة والسبعون — تعليم جدة · ١٤٤٨هـ</p>
+  <p class="m">إعداد وتنفيذ: المعلمة دلال صلاح · مديرة المدرسة: ثريا الفيصل · تاريخ الإصدار: ${fmtDate(Date.now())}</p>
+  <p class="m">جميع الأرقام محسوبة من بيانات المنصة الفعلية. ما لا تتوافر بياناته مذكور صراحة.</p>
+  <h2>أولًا: المؤشرات الرئيسة</h2><table><tr><th>المؤشر</th><th>النتيجة الفعلية</th><th>المستهدف</th></tr>
+  ${row("إجمالي المشاركات",num(st.total))}${row("الطالبات المشاركات دون تكرار",num(st.students)+(st.enrolled?` من ${num(st.enrolled)}`:""))}${row("نسبة المشاركة",r(st.participation),tg("participation"))}${row("متوسط جودة المنتجات",r(st.quality)+(st.qualityN?` (ن=${num(st.qualityN)})`:""),tg("quality"))}${row("المشاركات ذات المساهمة الأسرية",r(st.familyPct),tg("family"))}${row("نسبة الإتقان في التقويم البعدي",r(st.mastery),tg("mastery"))}${row("رضا الطالبات",st.satisfaction!=null?num(st.satisfaction,2)+" من ٥":"<i>لا توجد بيانات</i>",tg("satisfaction"))}</table>
+  <h2>ثانيًا: المشاركة حسب الفصل</h2><table><tr><th>الفصل</th><th>المشاركات</th><th>الطالبات</th><th>المعتمدة</th></tr>${SECTIONS.map(s=>{const p=st.perSec[s.id];return `<tr><td>${s.l}</td><td>${num(p.subs)}</td><td>${num(p.students)}${p.enrolled?` من ${num(p.enrolled)}`:""}</td><td>${num(p.approved)}</td></tr>`}).join("")}</table>
+  <h2>ثالثًا: المنتجات حسب المسار</h2><table><tr><th>المسار</th><th>العدد</th></tr>${TRACKS.map(t=>`<tr><td>${t.n}</td><td>${num(st.perTrack[t.id]||0)}</td></tr>`).join("")}</table>
+  <h2>رابعًا: جودة المنتجات</h2>${st.qualityN?`<table><tr><th>المعيار</th><th>المتوسط</th></tr>${CRIT.map(c=>`<tr><td>${c.n}</td><td>${r(st.crit[c.k])}</td></tr>`).join("")}</table>`:"<p><i>لم تُقيَّم منتجات.</i></p>"}
+  <h2>خامسًا: نواتج التعلم (القبلي والبعدي)</h2><table><tr><th>الفصل</th><th>القبلي</th><th>البعدي</th><th>الفرق</th><th>الإتقان</th><th>التكافؤ</th></tr>${SECTIONS.map(s=>{const o=st.outcomes[s.id]||{};return `<tr><td>${s.l}</td><td>${o.eq?r(o.pre):"—"}</td><td>${o.eq?r(o.post):"—"}</td><td>${o.eq?num(o.post-o.pre,1):"—"}</td><td>${r(o.mastery)}</td><td>${o.eq?"متكافئة":"غير متوافرة/غير متكافئة"}</td></tr>`}).join("")}</table>${st.prePost?`<p>المتوسط الموزون للفصول المتكافئة: من ${r(st.prePost.pre)} إلى ${r(st.prePost.post)} (ن=${num(st.prePost.n)}).</p>`:""}
+  <h2>سادسًا: نتائج الاستبانات</h2><h3 style="font-size:16px">استبانة الطالبات</h3>${sv("students")}<h3 style="font-size:16px">استبانة الأسر</h3>${sv("families")}
+  <h2>سابعًا: ملاحظة منهجية</h2><p>التكريم إجراء ختامي في المرحلة السادسة وليس مؤشرًا لنجاح البرنامج. لا يتضمن هذا التقرير أسماء الطالبات أو أولياء الأمور.</p>
+  </body></html>`;
+}
+$$("[data-exp]").forEach(b=>b.onclick=()=>doExport(b.dataset.exp));
+
+/* ---------- Init: capabilities & subscriptions ---------- */
+function setRoleChip(){
+  const m={loading:"جارٍ التحقق من الصلاحية…",teacher:"المعلمة — صلاحية كاملة",student:"طالبة — صلاحية مساهِمة",viewer:"مشاهدة فقط",offline:"غير متصل بقاعدة البيانات"};
+  $("#roleChip").textContent=m[S.role]||"";
+  $("#navDash").hidden=S.role!=="teacher";
+  const ts=$("#techStatus");
+  ts.className="note "+(S.connected?"em":"red");
+  ts.innerHTML=S.connected?`${ic("db")}<span><b>قاعدة البيانات متصلة فعليًا.</b> البيانات المعروضة تُقرأ وتُكتب مباشرة في مستودع المنصة.${S.assets?" رفع الملفات مفعّل لحسابك.":""}</span>`:`${ic("db")}<span><b>قاعدة البيانات غير متاحة في هذا العرض.</b> تعمل المنصة بكامل وظائفها فقط عند فتحها من رابطها على claude.ai بعد تسجيل الدخول ومشاركتها معك.</span>`;
+}
+async function init(){
+  if(!window.claude||typeof window.claude.use!=="function"){S.role="offline";S.connected=false;setRoleChip();render();return}
+  const [db,user]=await Promise.all([claude.use("db").catch(()=>null),claude.use("user").catch(()=>null)]);
+  S.db=db;S.user=user;
+  if(!db){S.role="offline";S.connected=false;setRoleChip();render();return}
+  S.connected=true;
+  let admin=false,write=null;
+  try{admin=user?await user.canEdit():false}catch(_){}
+  try{write=user?await user.can("data.write"):null}catch(_){}
+  try{S.uid=user?await user.id():null}catch(_){}
+  S.role=admin?"teacher":(write!==false&&S.uid)?"student":"viewer";
+  setRoleChip();
+  claude.use("assets").then(a=>{S.assets=a;setRoleChip()}).catch(()=>{});
+  claude.use("downloads").then(d=>S.downloads=d).catch(()=>{});
+  const tmo=setTimeout(()=>{if(!S.galLoaded){toast("البيانات تتأخر في الوصول؛ قد تكون الشبكة بطيئة")}},10000);
+  db.collection("gallery").onSnapshot(sn=>{S.gallery=sn.docs.map(d=>({...d.data(),_id:d.id}));if(!sn.metadata.fromCache){S.galLoaded=true;clearTimeout(tmo)}else S.galLoaded=true;render()},()=>{S.galLoaded=true;render()});
+  db.doc("stats/summary").onSnapshot(d=>{S.stats=d.exists?d.data():null;if(S.stats&&S.role==="teacher"&&S.lastPub==null){const {updatedAt,...rest}=S.stats;S.lastPub=JSON.stringify(rest)}render()},()=>{});
+  db.doc("config/main").onSnapshot(d=>{S.config=d.exists?d.data():{};render()},()=>{});
+  if(S.role==="teacher"){
+    db.collection("inbox").onSnapshot(sn=>{S.inbox=sn.docs.map(d=>({id:d.id,data:d.data()}));S.inboxLoaded=true;render()},()=>{S.inboxLoaded=true;render()});
+    db.doc("assess/main").onSnapshot(d=>{S.assess=d.exists?d.data():{};render()},()=>{});
+  } else if(S.role==="student"){
+    db.doc("inbox/"+S.uid).onSnapshot(d=>{S.myDoc=d.exists?d.data():null;renderMine()},e=>{if(e&&e.code==="invalid_argument"){S.role="viewer";setRoleChip();render()}});
+  }
+  render();
+}
+
+renderStatic();bindTabs();route();setRoleChip();init();
+</script>
+</body>
+</html>
