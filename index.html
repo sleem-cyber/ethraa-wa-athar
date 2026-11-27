@@ -402,7 +402,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
         <h3>شاركي بإنتاجك المعرفي</h3>
         <p>نافذة واحدة مختصرة: اسمك وفصلك والدرس والمسار، ثم أرفقي منتجك. تراجعه المعلمة وتعتمده ليظهر في المعرض دون اسمك.</p>
       </div>
-      <a class="btn pri" href="#share"><svg class="i"><use href="#i-upload"/></svg>ابدئي المشاركة</a>
+      <a class="btn pri" href="#share" id="ctaShare"><svg class="i"><use href="#i-upload"/></svg>ابدئي المشاركة</a>
     </div>
 
     <div class="sec">
@@ -695,6 +695,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 "use strict";
 /* ---------- Constants ---------- */
 const SECTIONS=[{id:"3-2",l:"٣/٢"},{id:"3-5",l:"٣/٥"},{id:"3-6",l:"٣/٦"},{id:"3-7",l:"٣/٧"}];
+const FORMS_URL="https://forms.office.com/Pages/ResponsePage.aspx?id=zSxjNDYaf0-Asj0h3bqWPiYMHmvkWl9FveM9ndetGptUQVZTQUJQMVgzTlI1VUNOS1NZRFpEUTVIUC4u";
 const TRACKS=[
  {id:"t1",n:"هندسة المعرفة وتصميم الدروس",ic:"layers",d:"تصمّم الطالبة درسًا أو جزءًا منه: أهدافه وخريطته المفاهيمية ووسائله وتقويمه.",ex:["خريطة درس","عرض تقديمي","بطاقات مفاهيم"]},
  {id:"t2",n:"قيادة التعلم وتعليم الأقران",ic:"users",d:"تشرح الطالبة لأقرانها، وتقود مجموعة تعلم، وتدير نقاشًا صفيًا حول قضية من الدرس.",ex:["شرح درس","قيادة مجموعة","تقويم أقران"]},
@@ -863,6 +864,7 @@ function render(){
   if(r==="dashboard")renderDash();
 }
 function renderHome(){
+  const cta=$("#ctaShare");if(cta){if(!S.connected&&S.role!=="loading"){cta.href=FORMS_URL;cta.target="_blank";cta.rel="noopener"}else{cta.href="#share";cta.removeAttribute("target")}}
   const el=$("#galleryCount");
   if(S.galLoaded&&S.gallery.length)el.innerHTML=`${num(S.gallery.length)} منتجًا معتمدًا ${ic("arrow","width:16px;height:16px")}`;
 }
@@ -887,20 +889,21 @@ function renderGallery(){
     return `<button class="item" type="button" data-i="${i}"><div class="thumb">${img?`<img loading="lazy" alt="" src="${esc(blobUrl(img))}">`:ic(t.ic)}</div><div class="b"><h4>${esc(g.title)}</h4><span class="l">${esc(g.lesson)}</span><div class="tg"><span class="tag em">فصل ${secL(g.section)}</span>${tr?`<span class="chip">${esc(tr.n)}</span>`:""}${g.family?`<span class="tag">مشاركة أسرية</span>`:""}</div></div></button>`}).join("");
   gal.querySelectorAll(".item").forEach(b=>b.onclick=()=>openItem(list[+b.dataset.i]));
 }
-function mediaHtml(files,link){
+function mediaHtml(files,link,more){
   let h="";
   for(const f of files||[]){const u=blobUrl(f);if(!u)continue;const ct=f.ctype||"";
     if(ct.startsWith("image/"))h+=`<img src="${esc(u)}" alt="">`;
     else if(ct.startsWith("video/"))h+=`<video src="${esc(u)}" controls preload="metadata"></video>`;
     else h+=`<p style="margin-bottom:10px"><a class="btn ghost sm" href="${esc(u)}" target="_blank" rel="noopener">${ic("file")}فتح الملف: ${esc(f.name||"مرفق")}</a></p>`;}
-  const l=safeUrl(link);if(l)h+=`<p style="margin-bottom:10px"><a class="btn ghost sm" href="${esc(l)}" target="_blank" rel="noopener">${ic("link")}فتح الرابط</a> <span class="mini" dir="ltr">${esc(l.slice(0,60))}</span></p>`;
+  const all=[...new Set([link,...(Array.isArray(more)?more:[])].map(safeUrl).filter(Boolean))];
+  for(const l of all)h+=`<p style="margin-bottom:10px"><a class="btn ghost sm" href="${esc(l)}" target="_blank" rel="noopener">${ic("link")}فتح الرابط</a> <span class="mini" dir="ltr">${esc(l.slice(0,60))}</span></p>`;
   return h||`<p class="mini">لا يوجد مرفق.</p>`;
 }
 function openItem(g){
   const tr=trk(g.track),t=typ(g.ptype);
   $("#dlgT").textContent=g.title||"";
   $("#dlgS").textContent=`فصل ${secL(g.section)} · ${g.lesson||""}`;
-  $("#dlgB").innerHTML=mediaHtml(g.files,g.link)+`<div class="kv"><div><span>المسار</span>${esc(tr?tr.n:"—")}</div><div><span>نوع المشاركة</span>${esc(t?t.n:"—")}</div><div><span>المساهمة الأسرية</span>${g.family?"نعم":"لا"}</div><div><span>تاريخ الاعتماد</span>${fmtDate(g.approvedAt)}</div></div>${g.desc?`<p style="color:var(--ink-2)">${esc(g.desc)}</p>`:""}`;
+  $("#dlgB").innerHTML=mediaHtml(g.files,g.link,g.links)+`<div class="kv"><div><span>المسار</span>${esc(tr?tr.n:"—")}</div><div><span>نوع المشاركة</span>${esc(t?t.n:"—")}</div><div><span>المساهمة الأسرية</span>${g.family?"نعم":"لا"}</div><div><span>تاريخ الاعتماد</span>${fmtDate(g.approvedAt)}</div></div>${g.desc?`<p style="color:var(--ink-2)">${esc(g.desc)}</p>`:""}`;
   $("#dlg").showModal();
 }
 $("#dlgX").onclick=()=>$("#dlg").close();
@@ -969,10 +972,11 @@ function renderShare(){
   const gate=$("#shareGate"),lay=$("#shareLayout");
   let msg="";
   if(S.role==="loading")msg=`<div class="note" style="margin-bottom:16px">${ic("sync")}<span>جارٍ التحقق من صلاحيتك…</span></div>`;
-  else if(!S.connected)msg=`<div class="note red" style="margin-bottom:16px">${ic("lock")}<span>لا يمكن الإرسال من هذا العرض لأن قاعدة البيانات غير متاحة (لم يُسجَّل الدخول أو لم تُشارَك الصفحة معك). اطلبي من معلمتك رابط المشاركة أو نموذج Microsoft Forms البديل.</span></div>`;
+  else if(!S.connected)msg=`<div class="card" style="padding:28px;display:flex;gap:22px;align-items:center;flex-wrap:wrap;margin-bottom:18px"><span class="ic" style="width:56px;height:56px;border-radius:14px;background:var(--em-50);color:var(--em-700);display:grid;place-items:center;flex:none">${ic("forms","width:28px;height:28px")}</span><div style="flex:1;min-width:240px"><h3 style="font-size:19px">أرسلي مشاركتك عبر نموذج Microsoft Forms</h3><p style="color:var(--ink-2);font-size:15px;margin-top:4px">سجّلي الدخول بحسابك المدرسي (مدرستي / Teams)، ثم عبّئي النموذج وارفعي ملف منتجك أو ضعي رابطه. تصل مشاركتك إلى معلمتك مباشرة، وبعد اعتمادها تُعرض باسم فصلك دون اسمك.</p></div><a class="btn pri" href="${FORMS_URL}" target="_blank" rel="noopener">${ic("upload")}افتحي نموذج المشاركة</a></div><ol class="clean goals card" style="font-size:14.5px;padding:8px 22px"><li><span class="badge-n">١</span><span>افتحي النموذج وسجّلي الدخول بحسابك المدرسي.</span></li><li><span class="badge-n">٢</span><span>اكتبي اسمك واختاري فصلك والمسار، وارفعي منتجك (حتى ٣ ملفات، ١٠٠ ميجابايت للملف) أو ضعي رابطه.</span></li><li><span class="badge-n">٣</span><span>اضغطي «إرسال». تراجع المعلمة مشاركتك وتعتمدها.</span></li></ol>`;
   else if(S.role==="teacher")msg=`<div class="note em" style="margin-bottom:16px">${ic("panel")}<span>هذه معاينة لما تراه الطالبة. الإرسال متاح لحسابات الطالبات (صلاحية مساهِمة)، والمراجعة من <a href="#dashboard">لوحة المعلمة</a>.</span></div>`;
   else if(S.role==="viewer")msg=`<div class="note" style="margin-bottom:16px">${ic("lock")}<span>صلاحيتك الحالية للمشاهدة فقط. الإرسال يتطلب صلاحية «مساهِمة» تمنحها المعلمة.</span></div>`;
   gate.innerHTML=msg;
+  lay.hidden=!S.connected&&S.role!=="loading";
   const can=S.role==="student";
   $("#sSubmit").disabled=!can;
   // lessons datalist from gallery
@@ -1099,7 +1103,7 @@ function renderAll(){
 ["aSec","aStatus"].forEach(i=>$("#"+i).onchange=renderAll);$("#aQ").oninput=renderAll;
 
 async function reviewAct(act,e,card,btn){
-  if(act==="view"){$("#dlgT").textContent=e.title;$("#dlgS").textContent=`${e.name} · فصل ${secL(e.section)}`;$("#dlgB").innerHTML=mediaHtml(e.files,e.link);$("#dlg").showModal();return}
+  if(act==="view"){$("#dlgT").textContent=e.title;$("#dlgS").textContent=`${e.name} · فصل ${secL(e.section)}`;$("#dlgB").innerHTML=mediaHtml(e.files,e.link,e.links);$("#dlg").showModal();return}
   const scores={};card.querySelectorAll("[data-c]").forEach(s=>{if(s.value)scores[s.dataset.c]=+s.value});
   const note=card.querySelector("[data-note]").value.trim();
   const msg=card.querySelector("[data-msg]");
@@ -1110,7 +1114,7 @@ async function reviewAct(act,e,card,btn){
     await S.db.doc("inbox/"+e._doc).update({entries:{[e._id]:{status,scores,note,reviewedAt:Date.now()}}});
     const gref=S.db.doc("gallery/"+e._id);
     if(status==="approved"&&e.consent!==false){
-      await gref.set({section:e.section,lesson:e.lesson,title:e.title,track:e.track,ptype:e.ptype,files:e.files||[],link:safeUrl(e.link),desc:e.desc||"",family:!!(e.family&&e.family.yes),approvedAt:Date.now()});
+      await gref.set({section:e.section,lesson:e.lesson,title:e.title,track:e.track,ptype:e.ptype,files:e.files||[],link:safeUrl(e.link),links:(Array.isArray(e.links)?e.links.map(safeUrl).filter(Boolean):[]),desc:e.desc||"",family:!!(e.family&&e.family.yes),approvedAt:Date.now()});
     } else if(status!=="approved"||e.consent===false){ if(S.gallery.some(g=>g._id===e._id))await gref.delete(); }
     toast(status==="approved"?(e.consent===false?"اعتُمدت (لا تُعرض في المعرض لعدم موافقة الطالبة)":"اعتُمدت ونُشرت في المعرض"):status==="returned"?"أُعيدت للطالبة مع الملاحظة":"حُفظ التقييم");
     if($("#dlg").open&&$("#dlgB").contains(card))$("#dlg").close();
@@ -1196,8 +1200,8 @@ $("#impFile").onchange=async e=>{
         if(!name||!section){bad++;continue}
         const id="f"+hashStr(r.join("|"));if(existing[id]){skip++;continue}
         const famYes=/نعم|yes|^1$/i.test(g(r,"famYes"))||(!!g(r,"famKind")&&map.famYes<0);
-        const linkRaw=g(r,"link");const link=(linkRaw.match(/https:\/\/\S+/)||[""])[0];
-        add[id]={name:name.slice(0,80),section,lesson:g(r,"lesson").slice(0,120)||"غير محدد",title:(g(r,"title")||g(r,"lesson")||"منتج معرفي").slice(0,120),track:guessTrack(g(r,"track")),ptype:guessType(g(r,"ptype")),files:[],link,desc:"",
+        const links=[...new Set(head.map((h,ci)=>/رابط|ملف|رفع|ارفاق/.test(norm(h))?String(r[ci]??""):"").join(" ").match(/https:\/\/[^\s;,]+/g)||[])].slice(0,5);const link=links[0]||"";
+        add[id]={name:name.slice(0,80),section,lesson:g(r,"lesson").slice(0,120)||"غير محدد",title:(g(r,"title")||g(r,"lesson")||"منتج معرفي").slice(0,120),track:guessTrack(g(r,"track")),ptype:guessType(g(r,"ptype")),files:[],link,links,desc:"",
           family:{yes:famYes,kind:g(r,"famKind").slice(0,200)},gained:g(r,"gained").slice(0,500),consent:true,createdAt:Date.now(),status:"pending",source:"forms"};
       }
       const n=Object.keys(add).length;
@@ -1272,7 +1276,7 @@ $$("[data-exp]").forEach(b=>b.onclick=()=>doExport(b.dataset.exp));
 
 /* ---------- Init: capabilities & subscriptions ---------- */
 function setRoleChip(){
-  const m={loading:"جارٍ التحقق من الصلاحية…",teacher:"المعلمة — صلاحية كاملة",student:"طالبة — صلاحية مساهِمة",viewer:"مشاهدة فقط",offline:"غير متصل بقاعدة البيانات"};
+  const m={loading:"جارٍ التحقق من الصلاحية…",teacher:"المعلمة — صلاحية كاملة",student:"طالبة — صلاحية مساهِمة",viewer:"مشاهدة فقط",offline:"النسخة العامة للعرض"};
   $("#roleChip").textContent=m[S.role]||"";
   $("#navDash").hidden=S.role!=="teacher";
   const ts=$("#techStatus");
